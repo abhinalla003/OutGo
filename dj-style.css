@@ -463,7 +463,6 @@ a {
 
 .dj-input {
     padding: 8px;
-    display: block;
     border: none;
     border-bottom: 1px solid #ccc;
     width: 100%
@@ -1140,6 +1139,10 @@ a {
 .dj-card-4,
 .dj-hover-shadow:hover {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.dj-hover-shadow-white:hover {
+    box-shadow: 0 4px 10px 0 rgba(124, 121, 121, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
 .dj-spin {
@@ -2038,4 +2041,25 @@ a {
     background: #151414;
     box-shadow: inset 8px 8px 19px #0c0c0c,
         inset -8px -8px 19px #1e1c1c;
+}
+
+hr .dj-line-style{
+    text-shadow:1px 1px 0 #444;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+
+input:focus{
+    outline: none;
+    box-shadow: 0px 0px 5px #f8f9fa;
+    border:1px solid #fbfbfc;
+}
+
+input:focus:hover{
+    outline: none;
+    box-shadow: 0px 0px 5px #fdfdfd;
+    border:1px solid #ffffff;
+    border-radius:0;
+    
 }
