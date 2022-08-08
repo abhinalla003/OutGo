@@ -1,11 +1,12 @@
 <?php
     include "connection.php";
-
+    date_default_timezone_set("Asia/Kolkata");
     if(isset($_REQUEST['btnregnow']))
     {
         $mail=$_REQUEST['email'];
         $pass1=md5($_REQUEST['pass']);
         $pass2=md5($_REQUEST['conpass']);
+        $date=date("y-m-d");
         $alreadyQuery="SELECT * FROM tbl_user WHERE email='$mail'";
         $alreadyResult=mysqli_query($conn,$alreadyQuery);
         $userCount=mysqli_num_rows($alreadyResult);
@@ -20,7 +21,7 @@
         {
             if($pass1==$pass2)
             {
-                $insertQuery="INSERT INTO tbl_user (email, password) VALUES('$mail','$pass1')";
+                $insertQuery="INSERT INTO tbl_user (email, password, joined_since) VALUES('$mail','$pass1','$date')";
                 if(mysqli_query($conn,$insertQuery))
                 {
                     echo '<script>

@@ -8,16 +8,28 @@
     if(isset($_REQUEST['btnlogin']))
     {
         $mail=$_REQUEST['email'];
-        $pass=$_REQUEST['pass'];
+        $pass=md5($_REQUEST['pass']);
         $checkUser="SELECT * FROM tbl_user WHERE email='$mail' AND password='$pass'";
         $userResult=mysqli_query($conn,$checkUser);
         $userCount=mysqli_num_rows($userResult);
-        if($userCount>=1)
+        $userIdFetch=mysqli_fetch_assoc($userResult);
+        $userId=$userIdFetch['u_id'];
+        $userLog=$userIdFetch['log'];
+        if($userCount>=1 and $userLog==1)
         {
-            $_SESSION['user'] = $mail;
+
+            $_SESSION['user'] = $userId;
             sleep(2);
             echo "<script>
                 window.location.href='user/dashboard.php';
+                </script>";
+        }
+        else if($userCount>=1 and $userLog==0)
+        {
+            $_SESSION['user'] = $userId;
+            sleep(2);
+            echo "<script>
+                window.location.href='user/editprofile.php';
                 </script>";
         }
         else if($userCount<=0)

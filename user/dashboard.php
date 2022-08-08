@@ -2,7 +2,31 @@
     session_start();
     if(isset($_SESSION['user']))
     {
-?>
+        include '../connection.php';
+        $userId=$_SESSION['user'];
+        $ttl_amt=0;
+        date_default_timezone_set("Asia/Kolkata");
+        $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
+        $userDetailsResult=mysqli_query($conn,$userDetails);
+        $userInfo=mysqli_fetch_assoc($userDetailsResult);
+        $userJob=$userInfo['job'];
+        $userState=$userInfo['state'];
+        $userCountry=$userInfo['country'];
+        $dob=$userInfo['dob'];
+        $date1=date_create($dob);
+        $dob=date_format($date1,"F d, Y");
+        
+        $fetchExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
+        $fetchExpensesResult=mysqli_query($conn,$fetchExpenses);
+        $allExpenses=mysqli_fetch_all($fetchExpensesResult,MYSQLI_ASSOC);
+        foreach($allExpenses as $exp)
+        {
+            $amt=$exp['amount'];
+            $ttl_amt=$ttl_amt+$amt;
+        }
+        $total_limit=$userInfo['expense_limit'];
+        $limit=$total_limit-$ttl_amt;
+        ?>
 <!DOCTYPE html>
 
 <html>
@@ -36,6 +60,8 @@
                 style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Statement</a>
+            <a href="dashboard.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+                style="margin-top: 0.5rem;" title="Statement">Dashboard</a>
 
         </div>
     </div>
@@ -45,7 +71,7 @@
         <a href="#" class="dj-bar-item dj-button dj-padding-large">Link 1</a>
         <a href="#" class="dj-bar-item dj-button dj-padding-large">Link 2</a>
         <a href="#" class="dj-bar-item dj-button dj-padding-large">Link 3</a>
-        <a href="#" class="dj-bar-item dj-button dj-padding-large">My Profile</a>
+        <a href="myprofile.php" class="dj-bar-item dj-button dj-padding-large">My Profile</a>
     </div>
 
     <!-- Page Container -->
@@ -57,13 +83,16 @@
                 <!-- Profile -->
                 <div class="dj-card-4 dj-round-large dj-premium dj-hover-shadow-white">
                     <div class="dj-container">
-                        <h4 class="dj-center dj-text-orange">My Profile</h4>
+                        <h4 class="dj-center dj-text-orange"><a href="myprofile.php" style="text-decoration: none;">My
+                                Profile</a></h4>
                         <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> Designer, UI</p>
-                        <p><i class="fa fa-home fa-fw dj-margin-right dj-text-theme"></i> London, UK</p>
-                        <p><i class="fa fa-birthday-cake fa-fw dj-margin-right dj-text-theme"></i> April 1, 1988</p>
+                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?></p>
+                        <p><i class="fa fa-home fa-fw dj-margin-right dj-text-theme"></i>
+                            <?php echo "$userState, ".$userCountry; ?></p>
+                        <p><i class="fa fa-birthday-cake fa-fw dj-margin-right dj-text-theme"></i> <?php echo $dob; ?>
+                        </p>
                     </div>
                 </div>
                 <br>
@@ -161,40 +190,62 @@
                                     <div class="dj-row-padding">
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Name :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="name">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" name="name"
+                                                required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Date :</span>
-                                            <input type="date" class="dj-input dj-round-large dj-premium" name="date">
+                                            <input type="date" placeholder="yyyy-mm-dd"
+                                                class="dj-input dj-round-large dj-premium" name="date" required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Time :</span>
-                                            <input type="time" class="dj-input dj-round-large dj-premium" name="time">
+                                            <input type="time" value="<?php echo date("h:i:s");   ?>"
+                                                class="dj-input dj-round-large dj-premium" name="time">
                                         </div>
                                     </div>
                                     <div class="dj-row-padding">
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Amount :</span>
                                             <input type="number" class="dj-input dj-round-large dj-premium"
-                                                name="amount">
+                                                name="amount" required>
                                         </div>
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Category :</span>
-                                            <select class="dj-input dj-round-large dj-premium" name="category">
-                                                <option value="volvo">Volvo</option>
-                                                <option value="saab">Saab</option>
-                                                <option value="mercedes">Mercedes</option>
-                                                <option value="audi">Audi</option>
+                                            <select class="dj-input dj-round-large dj-premium" name="category" required>
+                                                <option value="None">None</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Clothes">Clothes</option>
+                                                <option value="Vegetables">Vegetables</option>
+                                                <option value="Electronic Devices">Electronic Devices</option>
                                             </select>
                                         </div>
                                         <div class="dj-row-padding">
                                             <span class="dj-left dj-padding-16">Comment :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium"
-                                                name="comment">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" name="comment"
+                                                required>
                                         </div>
-                                        <button name="button"
+                                        <button name="btnaddexpen"
                                             class="dj-margin-top-32 dj-margin-bottom dj-button dj-orange dj-round-large">Submit</button>
                                 </form>
+                                <?php
+        if(isset($_REQUEST['btnaddexpen']))
+        {
+            include '../connection.php';
+            $name=$_REQUEST['name'];
+            $date=$_REQUEST['date'];
+            $time=$_REQUEST['time'];
+            $amount=$_REQUEST['amount'];
+            $category=$_REQUEST['category'];
+            $comment=$_REQUEST['comment'];
+            $addExpense="INSERT INTO tbl_expenses (u_id,ename,date,time,amount,category,comment)
+            VALUES('$userId','$name','$date','$time','$amount','$category','$comment')";
+            if(mysqli_query($conn,$addExpense))
+            {
+                echo "<script>alert('Expenses added successfully...');</script>";
+            }
+        }
+?>
                             </div>
                         </div>
                     </div>
@@ -209,15 +260,33 @@
             <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
                 <div class="dj-container">
                     <p class="dj-text-orange"><b>Total Limit</b></p>
-                    <p>50,000</p>
+                    <p><?php echo $total_limit; ?></p>
                     <p class="dj-text-orange"><b>Check Available Limit</b></p>
                     <div class="dj-row-padding dj-margin-bottom">
+                        <?php
+                        if(isset($_REQUEST['btnCheck']))
+                        {
+                        ?>
                         <div class="dj-half">
-                            <button class="dj-padding dj-premium dj-round-large" style="border: none;">10,000</button>
+                            <button class="dj-padding dj-premium dj-round-large"
+                                style="border: none;"><?php echo $limit; ?></button>
                         </div>
+                        <?php
+                        }
+                        else
+                        {
+                        ?>
                         <div class="dj-half">
-                            <button class="dj-button dj-orange dj-round-large">Check</button>
+                            <button class="dj-padding dj-premium dj-round-large" style="border: none;">00</button>
                         </div>
+                        <?php    
+                        }
+                        ?>
+                        <form action="" method="post">
+                            <div class="dj-half">
+                                <button name="btnCheck" class="dj-button dj-orange dj-round-large">Check</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
