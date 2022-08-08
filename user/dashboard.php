@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION['user']))
+    {
+?>
 <!DOCTYPE html>
 
 <html>
@@ -23,6 +28,8 @@
                 style="margin-top: 0.5rem;" title="My Account">
                 <img src="../images/avatar.png" class="dj-circle" style="height:27px;width:27px" alt="Avatar">
             </a>
+            <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+                style="margin-top: 0.5rem;" title="Logout">Logout</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
@@ -195,69 +202,76 @@
 
                 <!-- End Middle Column -->
             </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="dj-col m2">
-                <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
-                    <div class="dj-container">
-                        <p class="dj-text-orange"><b>Total Limit</b></p>
-                        <p>50,000</p>
-                        <p class="dj-text-orange"><b>Check Available Limit</b></p>
-                        <div class="dj-row-padding dj-margin-bottom">
-                            <div class="dj-half">
-                                <button class="dj-padding dj-premium dj-round-large" style="border: none;">10,000</button>
-                            </div>
-                            <div class="dj-half">
-                                <button class="dj-button dj-orange dj-round-large">Check</button>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <br>
-                <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
-                    <div class="dj-container">
-                        <p class="dj-text-orange">Upcoming Events:</p>
-                        <img src="../images/f1.png" alt="Forest" style="width:100%;">
-                        <p><strong>Holiday</strong></p>
-                        <p>Friday 15:00</p>
-                        <p><button class="dj-button dj-block dj-orange dj-round-large">Info</button></p>
-                    </div>
-                </div>
-                <!-- End Right Column -->
-            </div>
-
-            <!-- End Grid -->
         </div>
 
-        <!-- End Page Container -->
+        <!-- Right Column -->
+        <div class="dj-col m2">
+            <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
+                <div class="dj-container">
+                    <p class="dj-text-orange"><b>Total Limit</b></p>
+                    <p>50,000</p>
+                    <p class="dj-text-orange"><b>Check Available Limit</b></p>
+                    <div class="dj-row-padding dj-margin-bottom">
+                        <div class="dj-half">
+                            <button class="dj-padding dj-premium dj-round-large" style="border: none;">10,000</button>
+                        </div>
+                        <div class="dj-half">
+                            <button class="dj-button dj-orange dj-round-large">Check</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
+                <div class="dj-container">
+                    <p class="dj-text-orange">Upcoming Events:</p>
+                    <img src="../images/f1.png" alt="Forest" style="width:100%;">
+                    <p><strong>Holiday</strong></p>
+                    <p>Friday 15:00</p>
+                    <p><button class="dj-button dj-block dj-orange dj-round-large">Info</button></p>
+                </div>
+            </div>
+            <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
     </div>
     <br>
 
     <script>
-        // Accordion
-        function myFunction(id) {
-            var x = document.getElementById(id);
-            if (x.className.indexOf("dj-show") == -1) {
-                x.className += " dj-show";
-                x.previousElementSibling.className += " dj-theme-d1";
-            } else {
-                x.className = x.className.replace("dj-show", "");
-                x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" dj-theme-d1", "");
-            }
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("dj-show") == -1) {
+            x.className += " dj-show";
+            x.previousElementSibling.className += " dj-theme-d1";
+        } else {
+            x.className = x.className.replace("dj-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" dj-theme-d1", "");
         }
-        // Used to toggle the menu on smaller screens when clicking on the menu button
-        function openNav() {
-            var x = document.getElementById("navDemo");
-            if (x.className.indexOf("dj-show") == -1) {
-                x.className += " dj-show";
-            } else {
-                x.className = x.className.replace(" dj-show", "");
-            }
+    }
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("dj-show") == -1) {
+            x.className += " dj-show";
+        } else {
+            x.className = x.className.replace(" dj-show", "");
         }
+    }
     </script>
 </body>
 
 </html>
+<?php
+}
+else
+{
+	header("location: ../login.php");
+}
+?>

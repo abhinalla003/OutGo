@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (isset($_SESSION['user'])) {
+        session_destroy();
+    }
     include "connection.php";
 
     if(isset($_REQUEST['btnlogin']))
@@ -10,7 +14,18 @@
         $userCount=mysqli_num_rows($userResult);
         if($userCount>=1)
         {
-            echo "<script>alert('Login Successfully')</script>";
+            $_SESSION['user'] = $mail;
+            sleep(2);
+            echo "<script>
+                window.location.href='user/dashboard.php';
+                </script>";
+        }
+        else if($userCount<=0)
+        {
+            echo "<script>
+                alert('Please Register Yourself');
+                window.location.href='register.php';
+                </script>";
         }
         else
         {
@@ -49,10 +64,10 @@
                 <input type="email" class="dj-input dj-round-large dj-premium" name="email">
                 <span class="dj-left dj-padding-16">Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="pass">
-                <button name="btnlogin" value="Login Now"
-                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Login Now</button><br><br>
+                <button name="btnlogin" value="Login"
+                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Login</button><br><br>
                 <span class="dj-center dj-padding-16">Don't have an Account ? <a href="register.php"
-                        class="dj-bold dj-text-orange dj-remove-underline"><b>Sign Up Now</b></a></span>
+                        class="dj-bold dj-text-orange dj-remove-underline"><b>Sign Up</b></a></span>
             </form>
 
         </div>

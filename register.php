@@ -4,8 +4,8 @@
     if(isset($_REQUEST['btnregnow']))
     {
         $mail=$_REQUEST['email'];
-        $pass1=$_REQUEST['pass'];
-        $pass2=$_REQUEST['conpass'];
+        $pass1=md5($_REQUEST['pass']);
+        $pass2=md5($_REQUEST['conpass']);
         $alreadyQuery="SELECT * FROM tbl_user WHERE email='$mail'";
         $alreadyResult=mysqli_query($conn,$alreadyQuery);
         $userCount=mysqli_num_rows($alreadyResult);
@@ -18,17 +18,24 @@
         }
         else
         {
-            $insertQuery="INSERT INTO tbl_user (email, password) VALUES('$mail','$pass1')";
-            if(mysqli_query($conn,$insertQuery))
+            if($pass1==$pass2)
             {
-                echo '<script>
-                alert("Registered Successfully");
-                window.location.href="login.php";
-                </script>';
+                $insertQuery="INSERT INTO tbl_user (email, password) VALUES('$mail','$pass1')";
+                if(mysqli_query($conn,$insertQuery))
+                {
+                    echo '<script>
+                    alert("Registered Successfully");
+                    window.location.href="login.php";
+                    </script>';
+                }
+                else
+                {
+                    echo "<script>alert('Something Went Wrong')</script>";
+                }
             }
             else
             {
-                echo "<script>alert('Something Went Wrong')</script>";
+                echo "<script>alert('Passwords must be same')</script>";
             }
         }
     }
@@ -66,7 +73,7 @@
                 <span class="dj-left dj-padding-16">Confirm Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="conpass"><br><br>
                 <button name="btnregnow" value="Register Now"
-                    class="dj-margin-top dj-button dj-orange dj-round-large">Register Now</button><br><br>
+                    class="dj-margin-top dj-button dj-orange dj-round-large">Register</button><br><br>
                 <span class="dj-center dj-padding-16">Already have an Account ? <a href="login.php"
                         class="dj-bold dj-text-orange dj-remove-underline"><b>Sign In</b></a></span>
             </form>
