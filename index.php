@@ -60,10 +60,10 @@
     </div>
 
     <div class="dj-content dj-padding" style="max-width:1564px">
-        <div class="dj-container dj-padding-32 dj-right" style="margin-top: 80px;">
+        <div class="dj-container dj-padding-32 dj-right dj-animate-right" style="margin-top: 80px;">
             <img src="images/bg-home.png" width="100%" height="100%">
         </div>
-        <div class="dj-padding-32 dj-left" style="margin-top:170px;margin-left: 3rem;">
+        <div class="dj-padding-32 dj-left dj-animate-left" style="margin-top:170px;margin-left: 3rem;">
             <span class="dj-text-orange" style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: xx-large;">
                 <b>Beware of little expenses.</b></span><br><br>
             <span style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: xx-large;">A small leak will sink a
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Feachers of OutGo -->
-        <div class="dj-container dj-padding dj-row-padding" style="margin-left:3rem">
+        <div class="dj-container dj-padding dj-row-padding dj-animate-fading" style="margin-left:3rem">
             <div class="dj-third dj-card dj-hover-shadow-white dj-round-large dj-padding"
                 style="width:30%;margin-right: 3rem;">
                 <div class="dj-padding">
@@ -131,10 +131,10 @@
 
         <!-- About OutGo -->
         <div class="dj-container dj-padding dj-margin">
-            <div class="dj-left" width="30%">
+            <div class="dj-left dj-animate-left" width="30%">
                 <img src="images/about.png">
             </div>
-            <div class="dj-padding dj-margin-top-32" width="40%">
+            <div class="dj-padding dj-margin-top-32 dj-animate-right" width="40%">
                 <span class="dj-text-orange" style="font-weight: 9000;font-size:20px;">About Us</span>
                 <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
@@ -160,7 +160,7 @@
             <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
 
-            <div class="dj-left dj-half dj-padding" width="40%">
+            <div class="dj-left dj-half dj-padding dj-animate-left" width="40%">
                 <span class="dj-text-white" style="font-size:17px;">Reach to Us</span>
                 <div class="dj-margin-top dj-margin-right">
                     <span style="font-size:16px;" class="dj-text-orange">
@@ -219,7 +219,7 @@ border-radius: 5px;">
                 </div>
 
             </div>
-            <div class="dj-padding dj-half" width="60%">
+            <div class="dj-padding dj-half dj-animate-right" width="60%">
                 <span class="dj-text-orange" style="font-size:17px;">Write to Us</span>
                 <form action="" method="post" class="dj-margin-top">
                     <span class="dj-left dj-padding-16">Name :</span>
@@ -237,8 +237,9 @@ border-radius: 5px;">
             </div>
         </div>
     </div>
+    <!-- Footer -->
     <div class="dj-padding dj-margin-32 dj-hide-small">
-        <div class="dj-bar dj-silver dj-round-large dj-card-4">
+        <div class="dj-bar dj-silver dj-round-large dj-card-4 dj-animate-bottom">
             <div class="dj-padding dj-row-padding">
                 <div class="dj-third">
                     <div class="dj-padding">

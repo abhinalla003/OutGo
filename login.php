@@ -35,7 +35,7 @@
     <div class="dj-padding-32 dj-display-middle dj-center">
         <div class="dj-bar dj-silver dj-round-large dj-card-4" style="width: 60%;">
             <div class="dj-padding-16">
-                <a href="index.html" class="dj-center dj-wide dj-remove-underline" style="margin-top:0.4rem"><img
+                <a href="index.php" class="dj-center dj-wide dj-remove-underline" style="margin-top:0.4rem"><img
                         src="images/1111.png" width="400rem" height="40rem"></a>
             </div>
         </div>
