@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:8111
--- Generation Time: Aug 05, 2022 at 06:17 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Host: localhost
+-- Generation Time: Aug 08, 2022 at 09:24 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `outgo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_contact`
+--
+
+CREATE TABLE `tbl_contact` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mobile` varchar(10) NOT NULL,
+  `query` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_contact`
+--
+
+INSERT INTO `tbl_contact` (`id`, `name`, `email`, `mobile`, `query`) VALUES
+(1, 'Dhruv', 'goswami@gmail.com', '9327563251', 'Nothing much');
 
 -- --------------------------------------------------------
 
@@ -49,6 +70,12 @@ INSERT INTO `tbl_user` (`u_id`, `name`, `username`, `email`, `phone_no`, `passwo
 --
 
 --
+-- Indexes for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -57,6 +84,12 @@ ALTER TABLE `tbl_user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

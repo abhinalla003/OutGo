@@ -66,8 +66,8 @@
                 <span class="dj-left dj-padding-16">Confirm Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="conpass"><br><br>
                 <button name="btnregnow" value="Register Now"
-                    class="dj-margin-top dj-button dj-orange dj-round-large"></button><br><br>
-                <span class="dj-center dj-padding-16">Already have an Account ? <a href="login.html"
+                    class="dj-margin-top dj-button dj-orange dj-round-large">Register Now</button><br><br>
+                <span class="dj-center dj-padding-16">Already have an Account ? <a href="login.php"
                         class="dj-bold dj-text-orange dj-remove-underline"><b>Sign In</b></a></span>
             </form>
         </div>

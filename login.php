@@ -50,8 +50,8 @@
                 <span class="dj-left dj-padding-16">Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="pass">
                 <button name="btnlogin" value="Login Now"
-                    class="dj-margin-top-32 dj-button dj-orange dj-round-large"></button><br><br>
-                <span class="dj-center dj-padding-16">Don't have an Account ? <a href="register.html"
+                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Login Now</button><br><br>
+                <span class="dj-center dj-padding-16">Don't have an Account ? <a href="register.php"
                         class="dj-bold dj-text-orange dj-remove-underline"><b>Sign Up Now</b></a></span>
             </form>
 
