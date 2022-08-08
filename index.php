@@ -77,7 +77,7 @@
         </div>
 
         <!-- Feachers of OutGo -->
-        <div class="dj-container dj-padding dj-row-padding dj-animate-fading" style="margin-left:3rem">
+        <div class="dj-container dj-padding dj-row-padding" style="margin-left:3rem">
             <div class="dj-third dj-card dj-hover-shadow-white dj-round-large dj-padding"
                 style="width:30%;margin-right: 3rem;">
                 <div class="dj-padding">
