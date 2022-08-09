@@ -45,7 +45,7 @@
         <div class="dj-bar dj-silver dj-left-align dj-large">
             <a class="dj-bar-item dj-button dj-hide-medium dj-hide-large dj-right dj-padding-large dj-large dj-theme-d2"
                 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-            <a href="#" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
+            <a href="dashboard.php" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
                     height="40rem"></a>
             <a href="#" class="dj-bar-item dj-hide-small dj-right dj-padding-large dj-remove-underline"
                 style="margin-top: 0.5rem;" title="My Account">
@@ -87,8 +87,9 @@
                         <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?></p>
+                        <p><i class="fa fa-user fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
+                        <p><i class="fa fa-briefcase fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?>
+                        </p>
                         <p><i class="fa fa-home fa-fw dj-margin-right dj-text-theme"></i>
                             <?php echo "$userState, ".$userCountry; ?></p>
                         <p><i class="fa fa-birthday-cake fa-fw dj-margin-right dj-text-theme"></i> <?php echo $dob; ?>
@@ -101,17 +102,17 @@
                 <div class="dj-card-4 dj-round-large dj-hover-shadow-white">
                     <div class="dj-silver">
                         <button onclick="myFunction('Demo1')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-circle-o-notch fa-fw dj-margin-right"></i> My Expenses</button>
+                                class="fa fa-coins fa-fw dj-margin-right"></i> My Expenses</button>
                         <div id="Demo1" class="dj-hide dj-container">
                             <p>Some text..</p>
                         </div>
                         <button onclick="myFunction('Demo2')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-calendar-check-o fa-fw dj-margin-right"></i> Last Statements</button>
+                                class="fa fa-newspaper fa-fw dj-margin-right"></i> Last Statements</button>
                         <div id="Demo2" class="dj-hide dj-container">
                             <p>Some other text..</p>
                         </div>
                         <button onclick="myFunction('Demo3')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-users fa-fw dj-margin-right"></i> My Events</button>
+                                class="fa fa-calendar fa-fw dj-margin-right"></i> My Events</button>
                         <div id="Demo3" class="dj-hide dj-container">
                             <div class="dj-row-padding">
                                 <br>
@@ -156,9 +157,8 @@
                 <!-- Alert Box -->
                 <div
                     class="dj-container dj-display-container dj-round-large dj-silver dj-card-4 dj-margin-bottom dj-hide-small dj-hover-shadow-white">
-                    <span onclick="this.parentElement.style.display='none'"
-                        class="dj-button dj-theme-l3 dj-display-topright">
-                        <i class="fa fa-remove"></i>
+                    <span onclick="this.parentElement.style.display='none'" class="dj-button dj-display-topright">
+                        <i class="fa fa-lightbulb dj-text-orange" style="margin-top: 12px;"></i>
                     </span>
                     <p class="dj-text-orange"><strong>Tips</strong></p>
                     <p>Save Money !!!</p>
@@ -175,33 +175,37 @@
                         <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
                             <div class="dj-container dj-padding dj-margin-bottom">
                                 <h2 class="dj-text-orange">My Expenses </h2>
-                                <table>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Category</th>
-                                            <th>Amount</th>
-                                            <th>Comment</th>
-                                        </tr>
-                                        <?php
-                                        foreach($allExpenses as $exp)
+                                <table
+                                    class="dj-premium dj-margin-top dj-padding dj-round-large dj-hover-shadow-white dj-margin-bottom"
+                                    cellpadding="8" cellspacing="6">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Category</th>
+                                        <th>Comment</th>
+                                        <th colspan="2">Operation</th>
+                                    </tr>
+                                    <?php 
+                                        foreach($allExpenses as $expenseresult)
                                         {
-                                            $index=$index+1;
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $index; ?></td>
-                                            <td><?php echo $exp['ename']; ?></td>
-                                            <td><?php echo $exp['date']; ?></td>
-                                            <td><?php echo $exp['time']; ?></td>
-                                            <td><?php echo $exp['category']; ?></td>
-                                            <td><?php echo $exp['amount']; ?></td>
-                                            <td><?php echo $exp['comment']; ?></td>
-                                        </tr><br>
-                                        <?php
+                                            $index++;
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $index; ?></td>
+                                        <td><?php echo $expenseresult['ename']; ?></td>
+                                        <td><?php echo $expenseresult['date']; ?></td>
+                                        <td><?php echo $expenseresult['amount']; ?></td>
+                                        <td><?php echo $expenseresult['category']; ?></td>
+                                        <td><?php echo $expenseresult['comment']; ?></td>
+                                        <td><a href="" class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
+                                        <td><a href="" class="dj-button dj-silver dj-round-large">Delete</a></td>
+                                    </tr>
+                                    <?php
                                         }
-                                        ?>
+                                    ?>
+
                                 </table>
                             </div>
                         </div>
@@ -239,6 +243,7 @@
         }
     }
     </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.0/js/all.js"></script>
 </body>
 
 </html>

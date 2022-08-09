@@ -37,11 +37,12 @@
 <html>
 
 <head>
-
+    <title>Dashboard | Monthly Expenses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../dj-style.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Dashboard | Monthly Expenses</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 </head>
 
 <body class="dj-premium">
@@ -93,8 +94,9 @@
                         <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?></p>
+                        <p><i class="fa fa-user fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
+                        <p><i class="fa fa-briefcase fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?>
+                        </p>
                         <p><i class="fa fa-home fa-fw dj-margin-right dj-text-theme"></i>
                             <?php echo "$userState, ".$userCountry; ?></p>
                         <p><i class="fa fa-birthday-cake fa-fw dj-margin-right dj-text-theme"></i> <?php echo $dob; ?>
@@ -107,17 +109,17 @@
                 <div class="dj-card-4 dj-round-large dj-hover-shadow-white">
                     <div class="dj-silver">
                         <button onclick="myFunction('Demo1')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-circle-o-notch fa-fw dj-margin-right"></i> My Expenses</button>
+                                class="fa fa-coins fa-fw dj-margin-right"></i> My Expenses</button>
                         <div id="Demo1" class="dj-hide dj-container">
                             <p>Some text..</p>
                         </div>
                         <button onclick="myFunction('Demo2')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-calendar-check-o fa-fw dj-margin-right"></i> Last Statements</button>
+                                class="fa fa-newspaper fa-fw dj-margin-right"></i> Last Statements</button>
                         <div id="Demo2" class="dj-hide dj-container">
                             <p>Some other text..</p>
                         </div>
                         <button onclick="myFunction('Demo3')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-users fa-fw dj-margin-right"></i> My Events</button>
+                                class="fa fa-calendar fa-fw dj-margin-right"></i> My Events</button>
                         <div id="Demo3" class="dj-hide dj-container">
                             <div class="dj-row-padding">
                                 <br>
@@ -162,9 +164,8 @@
                 <!-- Alert Box -->
                 <div
                     class="dj-container dj-display-container dj-round-large dj-silver dj-card-4 dj-margin-bottom dj-hide-small dj-hover-shadow-white">
-                    <span onclick="this.parentElement.style.display='none'"
-                        class="dj-button dj-theme-l3 dj-display-topright">
-                        <i class="fa fa-remove"></i>
+                    <span onclick="this.parentElement.style.display='none'" class="dj-button dj-display-topright">
+                        <i class="fa fa-lightbulb dj-text-orange" style="margin-top: 12px;"></i>
                     </span>
                     <p class="dj-text-orange"><strong>Tips</strong></p>
                     <p>Save Money !!!</p>
@@ -197,7 +198,7 @@
                                             <input type="time" value="<?php echo date("h:i:s");   ?>"
                                                 class="dj-input dj-round-large dj-premium" name="time">
                                         </div>
-                                    </div>
+                                    </div><br>
                                     <div class="dj-row-padding">
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Amount :</span>
@@ -219,6 +220,7 @@
                                             </select>
                                         </div>
                                         <div class="dj-row-padding">
+                                            <br>
                                             <span class="dj-left dj-padding-16">Comment :</span>
                                             <input type="text" class="dj-input dj-round-large dj-premium" name="comment"
                                                 required>
@@ -332,6 +334,7 @@
         }
     }
     </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.0/js/all.js"></script>
 </body>
 
 </html>
