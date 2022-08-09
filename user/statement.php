@@ -16,26 +16,33 @@
         $dob=$userInfo['dob'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
+        
+        $fetchExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
+        $fetchExpensesResult=mysqli_query($conn,$fetchExpenses);
+        $allExpenses=mysqli_fetch_all($fetchExpensesResult,MYSQLI_ASSOC);
+        foreach($allExpenses as $exp)
+        {
+            $amt=$exp['amount'];
+            $ttl_amt=$ttl_amt+$amt;
+        }
+        $total_limit=$userInfo['expense_limit'];
+        $limit=$total_limit-$ttl_amt;
 
         $fetchCategory="SELECT * FROM tbl_category";
         $fetchCategoryResult=mysqli_query($conn,$fetchCategory);
         $allCategory=mysqli_fetch_all($fetchCategoryResult,MYSQLI_ASSOC);
-
-        $myExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
-        $myExpensesResult=mysqli_query($conn,$myExpenses);
-        $allExpenses=mysqli_fetch_all($myExpensesResult,MYSQLI_ASSOC);
-        $index=0;
         ?>
 <!DOCTYPE html>
 
 <html>
 
 <head>
-
+    <title>Dashboard | Monthly Expenses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../dj-style.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Dashboard | Monthly Expenses</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 </head>
 
 <body class="dj-premium">
@@ -45,7 +52,7 @@
         <div class="dj-bar dj-silver dj-left-align dj-large">
             <a class="dj-bar-item dj-button dj-hide-medium dj-hide-large dj-right dj-padding-large dj-large dj-theme-d2"
                 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-            <a href="dashboard.php" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
+            <a href="#" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
                     height="40rem"></a>
             <a href="#" class="dj-bar-item dj-hide-small dj-right dj-padding-large dj-remove-underline"
                 style="margin-top: 0.5rem;" title="My Account">
@@ -53,11 +60,11 @@
             </a>
             <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Logout">Logout</a>
-            <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+            <a href="myexpenses.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>
-            <a href="statement.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+            <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Statement</a>
             <a href="dashboard.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Dashboard</a>
@@ -168,39 +175,58 @@
             </div>
 
             <!-- Middle Column -->
-            <!-- Middle Column -->
-            <div class="dj-col m9">
+            <div class="dj-col m7">
                 <div class="dj-row-padding">
                     <div class="dj-col m12">
                         <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
                             <div class="dj-container dj-padding dj-margin-bottom">
-                                <h2 class="dj-text-orange">My Expenses </h2>
+                                <h2 class="dj-text-orange">Generate Statement</h2>
+                                <form action="generatestatement.php" method="post">
+                                    <div class="dj-row-padding">
+                                        <div class="dj-half">
+                                            <span class="dj-left dj-padding-16">From :</span>
+                                            <input type="date" class="dj-input dj-round-large dj-premium" name="from"
+                                                required>
+                                        </div>
+                                        <div class="dj-half">
+                                            <span class="dj-left dj-padding-16">To :</span>
+                                            <input type="date" placeholder="yyyy-mm-dd"
+                                                class="dj-input dj-round-large dj-premium" name="to" required>
+                                        </div>
+                                    </div>
+                                    <button name="btnstmt"
+                                        class="dj-margin-top-32 dj-margin-left dj-margin-bottom dj-button dj-orange dj-round-large">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
+                            <div class="dj-container dj-padding dj-margin-bottom">
+                                <h3 class="dj-text-orange">Your Last Transactions</h3>
                                 <table
-                                    class="dj-premium dj-margin-top dj-padding dj-round-large dj-hover-shadow-white dj-margin-bottom"
-                                    cellpadding="8" cellspacing="6">
-                                    <tr>
+                                    class="dj-premium dj-margin-top dj-padding dj-round-large dj-hover-shadow-white dj-margin-bottom dj-left"
+                                    cellpadding="8" cellspacing="12" style="width:100% ;">
+                                    <tr style="text-align: left;">
                                         <th>No.</th>
                                         <th>Name</th>
                                         <th>Date</th>
                                         <th>Amount</th>
                                         <th>Category</th>
-                                        <th>Comment</th>
-                                        <th colspan="2">Operation</th>
                                     </tr>
                                     <?php 
-                                        foreach($allExpenses as $expenseresult)
+                                        $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' LIMIT 7";
+                                        $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
+                                        $allTransaction=mysqli_fetch_all($fetchTransactionResult,MYSQLI_ASSOC);
+                                        foreach($allTransaction as $transactionresult)
                                         {
                                             $index++;
                                     ?>
                                     <tr>
                                         <td><?php echo $index; ?></td>
-                                        <td><?php echo $expenseresult['ename']; ?></td>
-                                        <td><?php echo $expenseresult['date']; ?></td>
-                                        <td><?php echo $expenseresult['amount']; ?></td>
-                                        <td><?php echo $expenseresult['category']; ?></td>
-                                        <td><?php echo $expenseresult['comment']; ?></td>
-                                        <td><a href="" class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
-                                        <td><a href="" class="dj-button dj-silver dj-round-large">Delete</a></td>
+                                        <td><?php echo $transactionresult['ename']; ?></td>
+                                        <td><?php echo $transactionresult['date']; ?></td>
+                                        <td><?php echo $transactionresult['amount']; ?></td>
+                                        <td><?php echo $transactionresult['category']; ?></td>
+
                                     </tr>
                                     <?php
                                         }
@@ -211,6 +237,56 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Middle Column -->
+            </div>
+
+            <!-- Right Column -->
+            <div class="dj-col m2">
+                <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
+                    <div class="dj-container">
+                        <p class="dj-text-orange"><b>Total Limit</b></p>
+                        <p><?php echo $total_limit; ?></p>
+                        <p class="dj-text-orange"><b>Check Available Limit</b></p>
+                        <div class="dj-row-padding dj-margin-bottom">
+                            <?php
+                        if(isset($_REQUEST['btnCheck']))
+                        {
+                        ?>
+                            <div class="dj-half">
+                                <button class="dj-padding dj-premium dj-round-large"
+                                    style="border: none;"><?php echo $limit; ?></button>
+                            </div>
+                            <?php
+                        }
+                        else
+                        {
+                        ?>
+                            <div class="dj-half">
+                                <button class="dj-padding dj-premium dj-round-large" style="border: none;">00</button>
+                            </div>
+                            <?php    
+                        }
+                        ?>
+                            <form action="" method="post">
+                                <div class="dj-half">
+                                    <button name="btnCheck" class="dj-button dj-orange dj-round-large">Check</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
+                    <div class="dj-container">
+                        <p class="dj-text-orange">Upcoming Events:</p>
+                        <img src="../images/f1.png" alt="Forest" style="width:100%;">
+                        <p><strong>Holiday</strong></p>
+                        <p>Friday 15:00</p>
+                        <p><button class="dj-button dj-block dj-orange dj-round-large">Info</button></p>
+                    </div>
+                </div>
+                <!-- End Right Column -->
             </div>
 
             <!-- End Grid -->

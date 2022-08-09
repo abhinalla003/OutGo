@@ -64,7 +64,7 @@
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>
-            <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+            <a href="statement.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Statement</a>
             <a href="dashboard.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Dashboard</a>
