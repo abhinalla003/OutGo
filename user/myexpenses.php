@@ -175,33 +175,37 @@
                         <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
                             <div class="dj-container dj-padding dj-margin-bottom">
                                 <h2 class="dj-text-orange">My Expenses </h2>
-                                <table>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Time</th>
-                                            <th>Category</th>
-                                            <th>Amount</th>
-                                            <th>Comment</th>
-                                        </tr>
-                                        <?php
-                                        foreach($allExpenses as $exp)
+                                <table
+                                    class="dj-premium dj-margin-top dj-padding dj-round-large dj-hover-shadow-white dj-margin-bottom"
+                                    cellpadding="8" cellspacing="6">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Category</th>
+                                        <th>Comment</th>
+                                        <th colspan="2">Operation</th>
+                                    </tr>
+                                    <?php 
+                                        foreach($allExpenses as $expenseresult)
                                         {
-                                            $index=$index+1;
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $index; ?></td>
-                                            <td><?php echo $exp['ename']; ?></td>
-                                            <td><?php echo $exp['date']; ?></td>
-                                            <td><?php echo $exp['time']; ?></td>
-                                            <td><?php echo $exp['category']; ?></td>
-                                            <td><?php echo $exp['amount']; ?></td>
-                                            <td><?php echo $exp['comment']; ?></td>
-                                        </tr><br>
-                                        <?php
+                                            $index++;
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $index; ?></td>
+                                        <td><?php echo $expenseresult['ename']; ?></td>
+                                        <td><?php echo $expenseresult['date']; ?></td>
+                                        <td><?php echo $expenseresult['amount']; ?></td>
+                                        <td><?php echo $expenseresult['category']; ?></td>
+                                        <td><?php echo $expenseresult['comment']; ?></td>
+                                        <td><a href="" class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
+                                        <td><a href="" class="dj-button dj-silver dj-round-large">Delete</a></td>
+                                    </tr>
+                                    <?php
                                         }
-                                        ?>
+                                    ?>
+
                                 </table>
                             </div>
                         </div>
