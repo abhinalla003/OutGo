@@ -45,7 +45,7 @@
         <div class="dj-bar dj-silver dj-left-align dj-large">
             <a class="dj-bar-item dj-button dj-hide-medium dj-hide-large dj-right dj-padding-large dj-large dj-theme-d2"
                 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-            <a href="#" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
+            <a href="dashboard.php" class="dj-bar-item dj-padding-large"><img src="../images/1111.png" width="400rem"
                     height="40rem"></a>
             <a href="#" class="dj-bar-item dj-hide-small dj-right dj-padding-large dj-remove-underline"
                 style="margin-top: 0.5rem;" title="My Account">
@@ -87,8 +87,9 @@
                         <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
-                        <p><i class="fa fa-pencil fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?></p>
+                        <p><i class="fa fa-user fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
+                        <p><i class="fa fa-briefcase fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userJob; ?>
+                        </p>
                         <p><i class="fa fa-home fa-fw dj-margin-right dj-text-theme"></i>
                             <?php echo "$userState, ".$userCountry; ?></p>
                         <p><i class="fa fa-birthday-cake fa-fw dj-margin-right dj-text-theme"></i> <?php echo $dob; ?>
@@ -101,17 +102,17 @@
                 <div class="dj-card-4 dj-round-large dj-hover-shadow-white">
                     <div class="dj-silver">
                         <button onclick="myFunction('Demo1')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-circle-o-notch fa-fw dj-margin-right"></i> My Expenses</button>
+                                class="fa fa-coins fa-fw dj-margin-right"></i> My Expenses</button>
                         <div id="Demo1" class="dj-hide dj-container">
                             <p>Some text..</p>
                         </div>
                         <button onclick="myFunction('Demo2')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-calendar-check-o fa-fw dj-margin-right"></i> Last Statements</button>
+                                class="fa fa-newspaper fa-fw dj-margin-right"></i> Last Statements</button>
                         <div id="Demo2" class="dj-hide dj-container">
                             <p>Some other text..</p>
                         </div>
                         <button onclick="myFunction('Demo3')" class="dj-button dj-block dj-left-align"><i
-                                class="fa fa-users fa-fw dj-margin-right"></i> My Events</button>
+                                class="fa fa-calendar fa-fw dj-margin-right"></i> My Events</button>
                         <div id="Demo3" class="dj-hide dj-container">
                             <div class="dj-row-padding">
                                 <br>
@@ -156,9 +157,8 @@
                 <!-- Alert Box -->
                 <div
                     class="dj-container dj-display-container dj-round-large dj-silver dj-card-4 dj-margin-bottom dj-hide-small dj-hover-shadow-white">
-                    <span onclick="this.parentElement.style.display='none'"
-                        class="dj-button dj-theme-l3 dj-display-topright">
-                        <i class="fa fa-remove"></i>
+                    <span onclick="this.parentElement.style.display='none'" class="dj-button dj-display-topright">
+                        <i class="fa fa-lightbulb dj-text-orange" style="margin-top: 12px;"></i>
                     </span>
                     <p class="dj-text-orange"><strong>Tips</strong></p>
                     <p>Save Money !!!</p>
@@ -243,6 +243,7 @@
         }
     }
     </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.0/js/all.js"></script>
 </body>
 
 </html>
