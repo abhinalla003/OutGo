@@ -133,7 +133,7 @@
             </a>
             <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Logout">Logout</a>
-            <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+            <a href="myexpenses.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>

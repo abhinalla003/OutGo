@@ -16,21 +16,15 @@
         $dob=$userInfo['dob'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
-        
-        $fetchExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
-        $fetchExpensesResult=mysqli_query($conn,$fetchExpenses);
-        $allExpenses=mysqli_fetch_all($fetchExpensesResult,MYSQLI_ASSOC);
-        foreach($allExpenses as $exp)
-        {
-            $amt=$exp['amount'];
-            $ttl_amt=$ttl_amt+$amt;
-        }
-        $total_limit=$userInfo['expense_limit'];
-        $limit=$total_limit-$ttl_amt;
 
         $fetchCategory="SELECT * FROM tbl_category";
         $fetchCategoryResult=mysqli_query($conn,$fetchCategory);
         $allCategory=mysqli_fetch_all($fetchCategoryResult,MYSQLI_ASSOC);
+
+        $myExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
+        $myExpensesResult=mysqli_query($conn,$myExpenses);
+        $allExpenses=mysqli_fetch_all($myExpensesResult,MYSQLI_ASSOC);
+        $index=0;
         ?>
 <!DOCTYPE html>
 
@@ -59,7 +53,7 @@
             </a>
             <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Logout">Logout</a>
-            <a href="myexpenses.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
+            <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>
@@ -174,138 +168,55 @@
             </div>
 
             <!-- Middle Column -->
-            <div class="dj-col m7">
+            <!-- Middle Column -->
+            <div class="dj-col m9">
                 <div class="dj-row-padding">
                     <div class="dj-col m12">
                         <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
                             <div class="dj-container dj-padding dj-margin-bottom">
-                                <h2 class="dj-text-orange">Add Expenses</h2>
-                                <form action="" method="post">
-                                    <div class="dj-row-padding">
-                                        <div class="dj-third">
-                                            <span class="dj-left dj-padding-16">Name :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="name"
-                                                required>
-                                        </div>
-                                        <div class="dj-third">
-                                            <span class="dj-left dj-padding-16">Date :</span>
-                                            <input type="date" placeholder="yyyy-mm-dd"
-                                                class="dj-input dj-round-large dj-premium" name="date" required>
-                                        </div>
-                                        <div class="dj-third">
-                                            <span class="dj-left dj-padding-16">Time :</span>
-                                            <input type="time" value="<?php echo date("h:i:s");   ?>"
-                                                class="dj-input dj-round-large dj-premium" name="time">
-                                        </div>
-                                    </div>
-                                    <div class="dj-row-padding">
-                                        <div class="dj-half">
-                                            <span class="dj-left dj-padding-16">Amount :</span>
-                                            <input type="number" class="dj-input dj-round-large dj-premium"
-                                                name="amount" required>
-                                        </div>
-                                        <div class="dj-half">
-                                            <span class="dj-left dj-padding-16">Category :</span>
-                                            <select class="dj-input dj-round-large dj-premium" name="category" required>
-                                                <?php
-                                                foreach($allCategory as $cat)
-                                                {
-                                                    $cname=$cat['cname'];
-                                                ?>
-                                                <option value="<?php echo $cname; ?>"><?php echo $cname; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="dj-row-padding">
-                                            <span class="dj-left dj-padding-16">Comment :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="comment"
-                                                required>
-                                        </div>
-                                        <button name="btnaddexpen"
-                                            class="dj-margin-top-32 dj-margin-bottom dj-button dj-orange dj-round-large">Submit</button>
-                                </form>
-                                <?php
-        if(isset($_REQUEST['btnaddexpen']))
-        {
-            include '../connection.php';
-            $name=$_REQUEST['name'];
-            $date=$_REQUEST['date'];
-            $time=$_REQUEST['time'];
-            $amount=$_REQUEST['amount'];
-            $category=$_REQUEST['category'];
-            $comment=$_REQUEST['comment'];
-            $addExpense="INSERT INTO tbl_expenses (u_id,ename,date,time,amount,category,comment)
-            VALUES('$userId','$name','$date','$time','$amount','$category','$comment')";
-            if(mysqli_query($conn,$addExpense))
-            {
-                echo "<script>alert('Expenses added successfully...');</script>";
-            }
-        }
-?>
+                                <h2 class="dj-text-orange">My Expenses </h2>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>S.R No</th>
+                                            <th>Expense Name</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Comment</th>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <?php
+                                        foreach($allExpenses as $exp)
+                                        {
+                                            $index=$index+1;
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $index; ?></td>
+                                            <td><?php echo $exp['ename']; ?></td>
+                                            <td><?php echo $exp['date']; ?></td>
+                                            <td><?php echo $exp['time']; ?></td>
+                                            <td><?php echo $exp['category']; ?></td>
+                                            <td><?php echo $exp['amount']; ?></td>
+                                            <td><?php echo $exp['comment']; ?></td>
+                                        </tr><br>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- End Middle Column -->
             </div>
+
+            <!-- End Grid -->
         </div>
 
-        <!-- Right Column -->
-        <div class="dj-col m2">
-            <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
-                <div class="dj-container">
-                    <p class="dj-text-orange"><b>Total Limit</b></p>
-                    <p><?php echo $total_limit; ?></p>
-                    <p class="dj-text-orange"><b>Check Available Limit</b></p>
-                    <div class="dj-row-padding dj-margin-bottom">
-                        <?php
-                        if(isset($_REQUEST['btnCheck']))
-                        {
-                        ?>
-                        <div class="dj-half">
-                            <button class="dj-padding dj-premium dj-round-large"
-                                style="border: none;"><?php echo $limit; ?></button>
-                        </div>
-                        <?php
-                        }
-                        else
-                        {
-                        ?>
-                        <div class="dj-half">
-                            <button class="dj-padding dj-premium dj-round-large" style="border: none;">00</button>
-                        </div>
-                        <?php    
-                        }
-                        ?>
-                        <form action="" method="post">
-                            <div class="dj-half">
-                                <button name="btnCheck" class="dj-button dj-orange dj-round-large">Check</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-            <br>
-            <div class="dj-card-4 dj-round-large dj-premium dj-center dj-hover-shadow-white">
-                <div class="dj-container">
-                    <p class="dj-text-orange">Upcoming Events:</p>
-                    <img src="../images/f1.png" alt="Forest" style="width:100%;">
-                    <p><strong>Holiday</strong></p>
-                    <p>Friday 15:00</p>
-                    <p><button class="dj-button dj-block dj-orange dj-round-large">Info</button></p>
-                </div>
-            </div>
-            <!-- End Right Column -->
-        </div>
-
-        <!-- End Grid -->
-    </div>
-
-    <!-- End Page Container -->
+        <!-- End Page Container -->
     </div>
     <br>
 
