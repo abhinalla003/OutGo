@@ -298,7 +298,7 @@
                                 }
                                 ?>
 
-                                <p class="dj-margin-left dj-text-orange">To change Your Password - <a href=""
+                                <p class="dj-margin-left dj-text-orange">To change Your Password - <a href="../forgotpassword.php"
                                         class="dj-remove-underline dj-text-white">Click Here</a></p>
                             </div>
                         </div>

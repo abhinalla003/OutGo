@@ -176,18 +176,15 @@
                             <div class="dj-container dj-padding dj-margin-bottom">
                                 <h2 class="dj-text-orange">My Expenses </h2>
                                 <table>
-                                    <tbody>
                                         <tr>
-                                            <th>S.R No</th>
-                                            <th>Expense Name</th>
+                                            <th>No</th>
+                                            <th>Name</th>
                                             <th>Date</th>
                                             <th>Time</th>
                                             <th>Category</th>
                                             <th>Amount</th>
                                             <th>Comment</th>
                                         </tr>
-                                    </tbody>
-                                    <tbody>
                                         <?php
                                         foreach($allExpenses as $exp)
                                         {
@@ -205,7 +202,6 @@
                                         <?php
                                         }
                                         ?>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
