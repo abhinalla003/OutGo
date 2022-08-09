@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:8111
--- Generation Time: Aug 09, 2022 at 12:22 PM
+-- Generation Time: Aug 08, 2022 at 08:02 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,29 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `outgo`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_category`
---
-
-CREATE TABLE `tbl_category` (
-  `c_id` int(11) NOT NULL,
-  `cname` varchar(255) NOT NULL,
-  `createdAt` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_category`
---
-
-INSERT INTO `tbl_category` (`c_id`, `cname`, `createdAt`) VALUES
-(1, 'None', '2022-08-09'),
-(2, 'Food', '2022-08-09'),
-(3, 'Vegetables', '2022-08-09'),
-(4, 'Clothes', '2022-08-09'),
-(5, 'Electronic Devices', '2022-08-09');
 
 -- --------------------------------------------------------
 
@@ -88,12 +65,7 @@ CREATE TABLE `tbl_expenses` (
 --
 
 INSERT INTO `tbl_expenses` (`e_id`, `u_id`, `ename`, `date`, `time`, `amount`, `category`, `comment`) VALUES
-(1, 3, 'Vegetables', '2022-08-08', '09:03:51', '200', 'Vegetables', 'Brought tomatoes and potatoes '),
-(2, 5, 'Vegetables', '2022-08-08', '06:31:40', '300', 'Vegetables', 'Brought tomatoes and potatoes '),
-(3, 5, 'Didi Dress', '2022-08-09', '03:06:21', '2000', 'Clothes', 'Brought dress from T&M'),
-(4, 5, 'McDonald', '2022-08-07', '07:00:18', '500', 'Food', 'Ordered burger and ice-cream from McD'),
-(5, 5, 'Iphone', '2022-08-01', '03:09:39', '120000', 'Electronic Devices', 'Brought Iphone for didi'),
-(6, 5, 'Vegetables', '2022-08-09', '07:11:13', '500', 'Vegetables', 'Brought tomatoes and potatoes ');
+(1, 3, 'Vegetables', '2022-08-08', '09:03:51', '200', 'Vegetables', 'Brought tomatoes and potatoes ');
 
 -- --------------------------------------------------------
 
@@ -136,12 +108,6 @@ INSERT INTO `tbl_user` (`u_id`, `name`, `username`, `email`, `phone_no`, `passwo
 --
 
 --
--- Indexes for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  ADD PRIMARY KEY (`c_id`);
-
---
 -- Indexes for table `tbl_contact`
 --
 ALTER TABLE `tbl_contact`
@@ -164,12 +130,6 @@ ALTER TABLE `tbl_user`
 --
 
 --
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `tbl_contact`
 --
 ALTER TABLE `tbl_contact`
@@ -179,7 +139,7 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT for table `tbl_expenses`
 --
 ALTER TABLE `tbl_expenses`
-  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

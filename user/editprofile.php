@@ -164,8 +164,10 @@
                     <div class="dj-container">
                         <h4 class="dj-center dj-text-orange"><a href="myprofile.php" style="text-decoration: none;">My
                                 Profile</a></h4>
-                        <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
-                                style="height:106px;width:106px" alt="Avatar"></p>
+                        <p class="dj-center"><img id="imgFileUpload" src="../images/addimg.jpeg" class="dj-circle"
+                                style="height:106px;width:106px;cursor: pointer" alt="Avatar"></p>
+                                <span id="spnFilePath"></span>
+<input type="file" id="FileUpload1" style="display: none" />
                         <hr>
                         <b>Name : </b><?php echo $name; ?><br><br>
                         <b>Email ID : </b><?php echo $email; ?><br><br>
@@ -315,7 +317,23 @@
                 x.className = x.className.replace(" dj-show", "");
             }
         }
+
         </script>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var fileupload = document.getElementById("FileUpload1");
+        var filePath = document.getElementById("spnFilePath");
+        var image = document.getElementById("imgFileUpload");
+        image.onclick = function () {
+            fileupload.click();
+        };
+        fileupload.onchange = function () {
+            var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
+            filePath.innerHTML = "<b>Selected File: </b>" + fileName;
+        };
+    };
+</script>
 </body>
 
 </html>
