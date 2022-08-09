@@ -76,6 +76,8 @@
                 <input type="email" class="dj-input dj-round-large dj-premium" name="email">
                 <span class="dj-left dj-padding-16">Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="pass">
+                <span class="dj-center"><a href="forgotpassword.php"
+                        class="dj-bold dj-text-orange dj-right dj-remove-underline">Forgot Password ? </a></span>
                 <button name="btnlogin" value="Login"
                     class="dj-margin-top-32 dj-button dj-orange dj-round-large">Login</button><br><br>
                 <span class="dj-center dj-padding-16">Don't have an Account ? <a href="register.php"
