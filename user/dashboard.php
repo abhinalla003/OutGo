@@ -253,6 +253,42 @@
 
                 <!-- End Middle Column -->
             </div>
+            <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white dj-margin">
+                <div class="dj-container dj-padding dj-margin-bottom">
+                    <h3 class="dj-text-orange">Your Expenses</h3>
+                    <table
+                        class="dj-premium dj-margin-top dj-padding dj-round-large dj-hover-shadow-white dj-margin-bottom dj-left"
+                        cellpadding="8" cellspacing="12" style="width:100% ;">
+                        <tr style="text-align: left;">
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                        </tr>
+                        <?php 
+                                        $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' ORDER BY date DESC LIMIT 7";
+                                        $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
+                                        $allTransaction=mysqli_fetch_all($fetchTransactionResult,MYSQLI_ASSOC);
+                                        foreach($allTransaction as $transactionresult)
+                                        {
+                                            $index++;
+                                    ?>
+                        <tr>
+                            <td><?php echo $index; ?></td>
+                            <td><?php echo $transactionresult['ename']; ?></td>
+                            <td><?php echo $transactionresult['date']; ?></td>
+                            <td><?php echo $transactionresult['amount']; ?></td>
+                            <td><?php echo $transactionresult['category']; ?></td>
+
+                        </tr>
+                        <?php
+                                        }
+                                    ?>
+
+                    </table>
+                </div>
+            </div>
         </div>
 
         <!-- Right Column -->
