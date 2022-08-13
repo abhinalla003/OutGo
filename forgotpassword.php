@@ -1,49 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION['user'])) {
-        session_destroy();
-    }
     include "connection.php";
-
-    if(isset($_REQUEST['btnlogin']))
-    {
-        $mail=$_REQUEST['email'];
-        $pass=md5($_REQUEST['pass']);
-        $checkUser="SELECT * FROM tbl_user WHERE email='$mail' AND password='$pass'";
-        $userResult=mysqli_query($conn,$checkUser);
-        $userCount=mysqli_num_rows($userResult);
-        $userIdFetch=mysqli_fetch_assoc($userResult);
-        $userId=$userIdFetch['u_id'];
-        $userLog=$userIdFetch['log'];
-        if($userCount>=1 and $userLog==1)
-        {
-
-            $_SESSION['user'] = $userId;
-            sleep(2);
-            echo "<script>
-                window.location.href = 'user/dashboard.php';
-            </script>";
-        }
-        else if($userCount>=1 and $userLog==0)
-        {
-            $_SESSION['user'] = $userId;
-            sleep(2);
-            echo "<script>
-                window.location.href = 'user/editprofile.php';
-            </script>";
-        }
-        else if($userCount<=0)
-        {
-            echo "<script>
-                alert('Please Register Yourself');
-                window.location.href='register.php';
-                </script>";
-        }
-        else
-        {
-            echo "<script>alert('Something Went Wrong')</script>";
-        }
-    }
 ?>
 <!DOCTYPE html>
 
@@ -54,7 +11,7 @@
 
     <link rel="stylesheet" href="dj-style.css">
 
-    <title>Sign Up | Monthly Expenses</title>
+    <title>Reset Password | Monthly Expenses</title>
 </head>
 
 <body class="dj-premium">
@@ -67,22 +24,68 @@
             </div>
         </div>
         <div class="dj-padding dj-bar" style="width: 60%;">
-
             <span class="dj-margin-top dj-text-orange dj-left"
                 style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: x-large;">
-                <b>Reset Your Password !</b></span><br><br><br>
-            <form action="" method="post">
+                <b>Reset your password !</b></span><br><br><br>
+            <form action="" method="post" name="sendOTPForm">
                 <span class="dj-left dj-padding-16">Email ID :</span>
                 <input type="email" class="dj-input dj-round-large dj-premium" name="email">
-                <button name="btnlogin" value="Login"
-                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Send OTP</button><br><br>
-                <span class="dj-center dj-padding-16">Wan't to Sign In ? <a href="register.php"
-                        class="dj-bold dj-text-orange dj-remove-underline"><b>Sign Up</b></a></span>
+                <button name="btnsendotp" value="Send OTP"
+                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Send
+                    OTP</button><br><br>
             </form>
+            <?php
+    if(isset($_REQUEST['btnsendotp']))
+    {
+        $email=$_REQUEST['email'];
+        $checkEmail="SELECT * FROM tbl_user WHERE email='$email'";
+        $checkEmailResult=mysqli_query($conn,$checkEmail);
+        $userInfo=mysqli_fetch_assoc($checkEmailResult);
+        $userEmail=$userInfo['email'];
+        if($email==$userEmail)
+        {
+            $to = "$userEmail";
+            $subject = "Forgot Password";
+            $otp=rand(1000,9999);
 
+            $message = "<b><h3>OutGo Team.</h3></b>";
+            $message .= "<h5>Your OTP is $otp.<br>Don't share with anyone.</h5>";
+            
+            $header = "From:customerservice@outgo.in \r\n";
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+            
+            $retval = mail ($to,$subject,$message,$header);
+            
+            if( $retval == true ) {
+                $_SESSION['userEmail']=$userEmail;
+                $_SESSION['otp']=$otp;
+                echo '<script>
+                alert("OTP is sent to Registered Email...");
+                window.location.href="verifyotp.php";
+                </script>';
+            }
+            else 
+            {
+                echo '<script>
+                    alert("OTP not sent. Try Again...");
+                    window.location.href="forgotpassword.php";
+                    </script>';
+            }
+        }
+        else 
+        {
+            echo '<script>
+                alert("Register Yourself");
+                window.location.href="register.php";
+                </script>';
+        }
+}
+    ?>
+            <span class="dj-center dj-padding-16">Want to Sign In ? <a href="login.php"
+                    class="dj-bold dj-text-orange dj-remove-underline"><b>Sign In</b></a></span>
         </div>
     </div>
-
 </body>
 
 </html>
