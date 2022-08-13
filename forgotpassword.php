@@ -44,34 +44,67 @@
         $userEmail=$userInfo['email'];
         if($email==$userEmail)
         {
-            $to = "$userEmail";
-            $subject = "Forgot Password";
+            require '/usr/share/php/libphp-phpmailer/src/PHPMailer.php';
+
+            require '/usr/share/php/libphp-phpmailer/src/SMTP.php';
+
+            $email = new PHPMailer\PHPMailer\PHPMailer();
+
+            $email->IsSMTP();
+
+            $email->isHTML(true);
+
+            $email->SMTPAuth = true;
+
+            $email->SMTPSecure = 'ssl';
+
+            $email->Host = "smtp.gmail.com";
+
+            $email->Port = 465;
+
+            //Set the gmail address that will be used for sending email
+
+            $email->Username = "outgomonthlyexpenses@gmail.com";
+
+            //Set the valid password for the gmail address
+
+            $email->Password = "wgwmcpmbskfvemer";
+
+            //Set the sender email address
+
+            $email->SetFrom("admin@example.com");
+
+            //Set the receiver email address
+
+            $email->AddAddress($userEmail);
+
+            $email->Subject = "Forgot Password";
+
             $otp=rand(1000,9999);
 
             $message = "<b><h3>OutGo Team.</h3></b>";
             $message .= "<h5>Your OTP is $otp.<br>Don't share with anyone.</h5>";
             
-            $header = "From:customerservice@outgo.in \r\n";
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html\r\n";
             
-            $retval = mail ($to,$subject,$message,$header);
+            $email->Body = $message;
             
-            if( $retval == true ) {
+            if(!$email->Send()) {
+
+                echo '<script>
+                    alert("OTP not sent. Try Again...");
+                    window.location.href="forgotpassword.php";
+                    </script>';
+              
+              } else {
+              
                 $_SESSION['userEmail']=$userEmail;
                 $_SESSION['otp']=$otp;
                 echo '<script>
                 alert("OTP is sent to Registered Email...");
                 window.location.href="verifyotp.php";
                 </script>';
-            }
-            else 
-            {
-                echo '<script>
-                    alert("OTP not sent. Try Again...");
-                    window.location.href="forgotpassword.php";
-                    </script>';
-            }
+              
+              }
         }
         else 
         {

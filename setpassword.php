@@ -30,7 +30,7 @@
                 style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: x-large;">
                 <b>Set the Password !</b></span><br><br><br>
             <form action="" method="post" name="resetPasswordForm">
-                <span class="dj-left dj-padding-16">Password :</span>
+                <span class="dj-left dj-padding-16">New Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="pass">
                 <span class="dj-left dj-padding-16">Confirm Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="conpass">

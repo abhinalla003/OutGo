@@ -5,7 +5,6 @@
         include '../connection.php';
         $userId=$_SESSION['user'];
         $ttl_amt=0;
-        $index=0;
         date_default_timezone_set("Asia/Kolkata");
         $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
         $userDetailsResult=mysqli_query($conn,$userDetails);
@@ -18,13 +17,12 @@
         $useremail=$userInfo['email'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
-        $index=1;
         
         if(isset($_REQUEST['btnstmt'])){
             $to = $_REQUEST['to'];
             $from = $_REQUEST['from'];
 
-            $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$from' AND date<='$to'";
+            $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$from' AND date<='$to' ORDER BY date ASC";
             $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
             $allTransaction=mysqli_fetch_all($fetchTransactionResult,MYSQLI_ASSOC);
 
@@ -38,16 +36,13 @@
                 global $to,$from;
                 
                 $output='';
-                include '../connection.php';
-                $userId=$_SESSION['user'];
-                $index=0;
-                date_default_timezone_set("Asia/Kolkata");
-                $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$from' AND date<='$to'";
-                $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
+
+                global $fetchTransactionResult;
+
                 while($allTransaction=mysqli_fetch_array($fetchTransactionResult)){
                     $output .= '
-                    <tr>
-                    <td>'.$index++.'</td>
+                    <tr style="padding:5px;">
+                    <td>1</td>
                     <td>'.$allTransaction['ename'].'</td>
                     <td>'.$allTransaction['date'].'</td>
                     <td>'.$allTransaction['time'].'</td>
@@ -113,6 +108,7 @@
                                         
                                         foreach($allTransaction as $transactionresult)
                                         {
+                                            $index++;
                                     ?>
             <tr>
                 <td><?php echo $index; ?></td>
@@ -125,8 +121,6 @@
 
             </tr>
             <?php
-
-$index++;
                                         }
                                     ?>
 
@@ -186,7 +180,7 @@ $index++;
             $email->Subject = "Statment of your Account";
 
             $message.="
-            <table>
+            <table cellpadding='8' cellspacing='8'>
                 <tr style='padding:6px;'>
                     <td>No.</td>
                     <td>Name</td>
@@ -196,19 +190,11 @@ $index++;
                     <td>Category</td>
                     <td>Comment</td>
                 </tr>
-                <tr style='padding:6px;'>
-                    <td>".$index."</td>
-                    <td>".$transactionresult['ename']."</td>
-                    <td>".$transactionresult['date']."</td>
-                    <td>".$transactionresult['time']."</td>
-                    <td>".$transactionresult['amount']."</td>
-                    <td>".$transactionresult['category']."</td>
-                    <td>".$transactionresult['comment']."</td>
-
-                </tr>
-            </table>";
+            ";
 
             $message.= fetch_data();
+
+            $message.="</table>";
 
             $email->Body = $message;
 
