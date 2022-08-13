@@ -76,10 +76,13 @@
                 <input type="email" class="dj-input dj-round-large dj-premium" name="email">
                 <span class="dj-left dj-padding-16">Password :</span>
                 <input type="password" class="dj-input dj-round-large dj-premium" name="pass">
-                <span class="dj-center"><a href="forgotpassword.php"
-                        class="dj-bold dj-text-orange dj-right dj-remove-underline">Forgot Password ? </a></span>
-                <button name="btnlogin" value="Login"
-                    class="dj-margin-top-32 dj-button dj-orange dj-round-large">Login</button><br><br>
+                <span><a href="forgotpassword.php"
+                        class="dj-bold dj-text-orange dj-right dj-margin-top dj-remove-underline"><b>Forgot
+                            Password ? </b></a></span>
+                <div class="dj-center" style="margin-top: 2.9rem;">
+                    <button type="submit" name="btnlogin" value="Login"
+                        class="dj-button dj-orange dj-margin dj-round-large">Login</button></span>
+                </div>
                 <span class="dj-center dj-padding-16">Don't have an Account ? <a href="register.php"
                         class="dj-bold dj-text-orange dj-remove-underline"><b>Sign Up</b></a></span>
             </form>

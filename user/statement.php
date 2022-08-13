@@ -213,7 +213,7 @@
                                         <th>Category</th>
                                     </tr>
                                     <?php 
-                                        $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' LIMIT 7";
+                                        $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' ORDER BY date DESC LIMIT 7";
                                         $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
                                         $allTransaction=mysqli_fetch_all($fetchTransactionResult,MYSQLI_ASSOC);
                                         foreach($allTransaction as $transactionresult)
