@@ -14,9 +14,10 @@
         $userState=$userInfo['state'];
         $userCountry=$userInfo['country'];
         $dob=$userInfo['dob'];
-        $email=$userInfo['email'];
+        $useremail=$userInfo['email'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
+        $index=1;
         
         if(isset($_REQUEST['btnstmt'])){
             $to = $_REQUEST['to'];
@@ -27,10 +28,37 @@
             $allTransaction=mysqli_fetch_all($fetchTransactionResult,MYSQLI_ASSOC);
 
             $date1=date_create($to);
-            $to=date_format($date1,"d F, Y");
+            $too=date_format($date1,"d F, Y");
 
             $date1=date_create($from);
-            $from=date_format($date1,"d F, Y");
+            $froom=date_format($date1,"d F, Y");
+
+            function fetch_data(){
+                global $to,$from;
+                
+                $output='';
+                include '../connection.php';
+                $userId=$_SESSION['user'];
+                $index=0;
+                date_default_timezone_set("Asia/Kolkata");
+                $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$from' AND date<='$to'";
+                $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
+                while($allTransaction=mysqli_fetch_array($fetchTransactionResult)){
+                    $output .= '
+                    <tr>
+                    <td>'.$index++.'</td>
+                    <td>'.$allTransaction['ename'].'</td>
+                    <td>'.$allTransaction['date'].'</td>
+                    <td>'.$allTransaction['time'].'</td>
+                    <td>'.$allTransaction['amount'].'</td>
+                    <td>'.$allTransaction['category'].'</td>
+                    <td>'.$allTransaction['comment'].'</td>
+                </tr>
+                    ';
+                }
+                return $output;
+            }
+            
         }
         ?>
 <!DOCTYPE html>
@@ -57,12 +85,12 @@
             <h4><b class="dj-text-orange">Name : </b><?php echo $userName; ?></h4>
         </div>
         <div class="dj-row-padding">
-            <h4><b class="dj-text-orange">Email ID : </b><?php echo $email; ?></h4>
+            <h4><b class="dj-text-orange">Email ID : </b><?php echo $useremail; ?></h4>
         </div>
         <div class="dj-row-padding">
             <div>
-                <h4><b class="dj-text-orange">Transaction Date : </b>From <b><?php echo $from; ?></b> To
-                    <b><?php echo $to; ?></b>
+                <h4><b class="dj-text-orange">Transaction Date : </b>From <b><?php echo $froom; ?></b> To
+                    <b><?php echo $too; ?></b>
                 </h4>
             </div>
 
@@ -84,7 +112,6 @@
                                         
                                         foreach($allTransaction as $transactionresult)
                                         {
-                                            $index++;
                                     ?>
             <tr>
                 <td><?php echo $index; ?></td>
@@ -97,6 +124,8 @@
 
             </tr>
             <?php
+
+$index++;
                                         }
                                     ?>
 
@@ -111,12 +140,92 @@
         <hr>
         <p class="dj-text-orange">* This is System generated statement. Hence,it does not require any
             signature.</p><br>
-        <button type="button" class="dj-button dj-round-large dj-orange" onclick="myFunction()"
-            id="printpagebutton">Download Statement</button>
-        <button type="button" class="dj-button dj-round-large dj-orange dj-margin-left" id="email">Email
-            Statement</button>
+        <form action="" method="post">
+            <input type="hidden" name="to" value="<?php echo $to; ?>">
+            <input type="hidden" name="from" value="<?php echo $from; ?>">
+            <button type="button" class="dj-button dj-round-large dj-orange" onclick="myFunction()"
+                id="printpagebutton">Download Statement</button>
+            <button type="submit" name="pdf" class="dj-button dj-round-large dj-orange dj-margin-left" id="email">Email
+                Statement</button>
+        </form>
 
     </div>
+
+    <?php
+        if(isset($_REQUEST['pdf'])){
+
+            require '/usr/share/php/libphp-phpmailer/src/PHPMailer.php';
+
+            require '/usr/share/php/libphp-phpmailer/src/SMTP.php';
+
+            require_once 'dummy.php';
+
+            $email = new PHPMailer\PHPMailer\PHPMailer();
+
+            $email->IsSMTP();
+
+            $email->SMTPAuth = true;
+
+            $email->SMTPSecure = 'ssl';
+
+            $email->Host = "smtp.gmail.com";
+
+            $email->Port = 465;
+
+            $email->isHTML(true);
+
+            $email->Username = "outgomonthlyexpenses@gmail.com";
+
+            $email->Password = "wgwmcpmbskfvemer";
+
+            $email->SetFrom("outgomonthlyexpenses@gmail.com");
+
+            $email->AddAddress($useremail);
+
+            $email->Subject = "Statment of your Account";
+
+            $message.="
+            <table>
+                <tr style='padding:6px;'>
+                    <td>No.</td>
+                    <td>Name</td>
+                    <td>Date</td>
+                    <td>Time</td>
+                    <td>Amount</td>
+                    <td>Category</td>
+                    <td>Comment</td>
+                </tr>
+                <tr style='padding:6px;'>
+                    <td>".$index."</td>
+                    <td>".$transactionresult['ename']."</td>
+                    <td>".$transactionresult['date']."</td>
+                    <td>".$transactionresult['time']."</td>
+                    <td>".$transactionresult['amount']."</td>
+                    <td>".$transactionresult['category']."</td>
+                    <td>".$transactionresult['comment']."</td>
+
+                </tr>
+            </table>";
+
+            $message.= fetch_data();
+
+            $email->Body = $message;
+
+            if(!$email->Send()) {
+
+            echo "Error: " . $email->ErrorInfo;
+
+            } else {
+
+                echo "<script>alert('Email sent successfully ...');
+                window.location.href='dashboard.php';
+                </script>";
+                
+
+            }
+        }
+    ?>
+
     <script>
     function myFunction() {
         var printButton = document.getElementById("printpagebutton");
