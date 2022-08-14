@@ -135,83 +135,16 @@
         <hr>
         <p class="dj-text-orange">* This is System generated statement. Hence,it does not require any
             signature.</p><br>
-        <form action="" method="post">
+        <form action="generatepdf.php" method="post">
             <input type="hidden" name="to" value="<?php echo $to; ?>">
             <input type="hidden" name="from" value="<?php echo $from; ?>">
-            <button type="button" class="dj-button dj-round-large dj-orange" onclick="myFunction()"
-                id="printpagebutton">Download Statement</button>
+            <button type="button" class="dj-button dj-round-large dj-orange" id="printpagebutton" onclick="myFunction()"
+                name="downloadstmt">Download Statement</button>
             <button type="submit" name="pdf" class="dj-button dj-round-large dj-orange dj-margin-left" id="email">Email
                 Statement</button>
         </form>
 
     </div>
-
-    <?php
-        if(isset($_REQUEST['pdf'])){
-
-            require '/usr/share/php/libphp-phpmailer/src/PHPMailer.php';
-
-            require '/usr/share/php/libphp-phpmailer/src/SMTP.php';
-
-            require_once 'dummy.php';
-
-            $email = new PHPMailer\PHPMailer\PHPMailer();
-
-            $email->IsSMTP();
-
-            $email->SMTPAuth = true;
-
-            $email->SMTPSecure = 'ssl';
-
-            $email->Host = "smtp.gmail.com";
-
-            $email->Port = 465;
-
-            $email->isHTML(true);
-
-            $email->Username = "outgomonthlyexpenses@gmail.com";
-
-            $email->Password = "wgwmcpmbskfvemer";
-
-            $email->SetFrom("outgomonthlyexpenses@gmail.com");
-
-            $email->AddAddress($useremail);
-
-            $email->Subject = "Statment of your Account";
-
-            $message.="
-            <table cellpadding='8' cellspacing='8'>
-                <tr style='padding:6px;'>
-                    <td>No.</td>
-                    <td>Name</td>
-                    <td>Date</td>
-                    <td>Time</td>
-                    <td>Amount</td>
-                    <td>Category</td>
-                    <td>Comment</td>
-                </tr>
-            ";
-
-            $message.= fetch_data();
-
-            $message.="</table>";
-
-            $email->Body = $message;
-
-            if(!$email->Send()) {
-
-            echo "Error: " . $email->ErrorInfo;
-
-            } else {
-
-                echo "<script>alert('Email sent successfully ...');
-                window.location.href='dashboard.php';
-                </script>";
-                
-
-            }
-        }
-    ?>
 
     <script>
     function myFunction() {
