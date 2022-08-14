@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:8111
--- Generation Time: Aug 09, 2022 at 12:22 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Host: localhost
+-- Generation Time: Aug 14, 2022 at 05:12 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,7 +93,12 @@ INSERT INTO `tbl_expenses` (`e_id`, `u_id`, `ename`, `date`, `time`, `amount`, `
 (3, 5, 'Didi Dress', '2022-08-09', '03:06:21', '2000', 'Clothes', 'Brought dress from T&M'),
 (4, 5, 'McDonald', '2022-08-07', '07:00:18', '500', 'Food', 'Ordered burger and ice-cream from McD'),
 (5, 5, 'Iphone', '2022-08-01', '03:09:39', '120000', 'Electronic Devices', 'Brought Iphone for didi'),
-(6, 5, 'Vegetables', '2022-08-09', '07:11:13', '500', 'Vegetables', 'Brought tomatoes and potatoes ');
+(6, 5, 'Vegetables', '2022-08-09', '07:11:13', '500', 'Vegetables', 'Brought tomatoes and potatoes '),
+(7, 6, 'Rent Payment', '2022-08-09', '09:34:08', '45000', 'None', 'Rent Payment Through Credit Card'),
+(8, 6, 'Electricity Bill', '2022-08-09', '09:35:00', '2208', 'None', 'Bill Payment'),
+(9, 6, 'Swiggy', '2022-08-09', '09:35:30', '840', 'Food', 'Burger and Snakes'),
+(10, 6, 'Recharge', '2022-08-01', '10:05:38', '299', 'Electronic Devices', 'Mobile Recharge VI'),
+(11, 6, 'Credit card bill', '2022-08-13', '12:37:00', '50577', 'None', 'ICICI credit card part payment done');
 
 -- --------------------------------------------------------
 
@@ -127,9 +132,8 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`u_id`, `name`, `username`, `email`, `phone_no`, `password`, `dob`, `age`, `job`, `salary`, `expense_limit`, `address`, `city`, `state`, `country`, `bio`, `log`, `joined_since`) VALUES
-(1, NULL, NULL, 'goswami@gmail.com', NULL, 'asd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-08-07'),
-(3, 'Abhishek Nalla', NULL, 'abhinalla1995@gmail.com', '9054849782', 'dsa', '2003-09-30', 18, 'Student', 200000, 100000, '208 Saidham Soc', 'Surat', 'Gujarat', 'India', 'Student', 1, '2022-08-07'),
-(5, 'Abhishek Anjaneyulu Nalla', NULL, 'nallaabhi2003@gmail.com', '9054849782', 'd76f3d05cc9ac98f1f9160274a39fe33', '2003-09-30', 18, 'Team Leader', 500000, 300000, '208 Saidham Soc', 'Surat', 'Gujarat', 'India', 'I have work experience of 10 years and expert in leading a team. I want to save money and invest in a better place.', 1, '2022-08-08');
+(5, 'Abhishek Anjaneyulu Nalla', NULL, 'nallaabhi2003@gmail.com', '9054849782', 'd76f3d05cc9ac98f1f9160274a39fe33', '2003-09-30', 18, 'Team Leader', 500000, 300000, '208 Saidham Soc', 'Surat', 'Gujarat', 'India', 'I have work experience of 10 years and expert in leading a team. I want to save money and invest in a better place.', 1, '2022-08-08'),
+(6, 'Dhruvpuri Goswami', NULL, 'djgoswami25@gmail.com', '9393939393', '1eba9614763773df08dd49049663c3e3', '2003-11-25', 18, 'CEO of Google', 950000, 800000, 'White Solitair', 'Surat', 'Gujarat', 'India', 'A chief executive officer (CEO) is the highest-ranking executive in a company. Broadly speaking, a chief executive officer’s primary responsibilities include making major corporate decisions, managing the overall operations and resources of a company.', 1, '2022-08-09');
 
 --
 -- Indexes for dumped tables
@@ -179,13 +183,13 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT for table `tbl_expenses`
 --
 ALTER TABLE `tbl_expenses`
-  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
