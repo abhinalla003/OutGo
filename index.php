@@ -42,9 +42,12 @@
             </div>
             <div class="dj-right" id="myNavbar"
                 style="padding-top: 1rem;padding-bottom: 1rem;padding-left: 0.5rem;padding-right: 1rem;">
-                <a href="#home" class="dj-bar-item dj-remove-underline"><b>Home</a>
-                <a href="#home" class="dj-bar-item dj-remove-underline"><b>About Us</a>
-                <a href="#home" class="dj-bar-item dj-remove-underline"><b>Contact Us</a>
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-home fa-fw dj-text-orange dj-margin-right"></i>Home</a>
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-user fa-fw dj-text-orange dj-margin-right"></i>About Us</a>
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-headset fa-fw dj-text-orange dj-margin-right"></i>Contact Us</a>
                 <a href="login.php" class="dj-bar-item dj-remove-underline dj-button dj-round-large dj-orange"><b>Sign
                         In</a>
             </div>
@@ -353,6 +356,7 @@ border-radius: 5px;">
                     </div>
                 </div>
             </div>
+            <script defer src="https://use.fontawesome.com/releases/v5.15.0/js/all.js"></script>
 </body>
 
 </html>
