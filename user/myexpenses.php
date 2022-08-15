@@ -199,7 +199,7 @@
                                         <td><?php echo $expenseresult['amount']; ?></td>
                                         <td><?php echo $expenseresult['category']; ?></td>
                                         <td><?php echo $expenseresult['comment']; ?></td>
-                                        <td><a href="updateexpense.php?name=<?php echo $expenseresult['ename']; ?>&amount=<?php echo $expenseresult['amount']; ?>"
+                                        <td><a href="updateexpense.php?name=<?php echo $expenseresult['ename']; ?>&amount=<?php echo $expenseresult['amount']; ?>&date=<?php echo $expenseresult['date']; ?>"
                                                 class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
                                         <td><a href="deleteexpense.php?name=<?php echo $expenseresult['ename']; ?>&amount=<?php echo $expenseresult['amount']; ?>"
                                                 class="dj-button dj-silver dj-round-large">Delete</a></td>
