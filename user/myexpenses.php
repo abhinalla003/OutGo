@@ -21,7 +21,7 @@
         $fetchCategoryResult=mysqli_query($conn,$fetchCategory);
         $allCategory=mysqli_fetch_all($fetchCategoryResult,MYSQLI_ASSOC);
 
-        $myExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId'";
+        $myExpenses="SELECT * FROM tbl_expenses WHERE u_id='$userId' ORDER BY date ASC";
         $myExpensesResult=mysqli_query($conn,$myExpenses);
         $allExpenses=mysqli_fetch_all($myExpensesResult,MYSQLI_ASSOC);
         $index=0;
@@ -199,8 +199,10 @@
                                         <td><?php echo $expenseresult['amount']; ?></td>
                                         <td><?php echo $expenseresult['category']; ?></td>
                                         <td><?php echo $expenseresult['comment']; ?></td>
-                                        <td><a href="" class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
-                                        <td><a href="" class="dj-button dj-silver dj-round-large">Delete</a></td>
+                                        <td><a href="updateexpense.php?name=<?php echo $expenseresult['ename']; ?>&amount=<?php echo $expenseresult['amount']; ?>"
+                                                class="dj-button dj-silver dj-round-large">Edit/Update</a></td>
+                                        <td><a href="deleteexpense.php?name=<?php echo $expenseresult['ename']; ?>&amount=<?php echo $expenseresult['amount']; ?>"
+                                                class="dj-button dj-silver dj-round-large">Delete</a></td>
                                     </tr>
                                     <?php
                                         }
