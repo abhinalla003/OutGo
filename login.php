@@ -17,7 +17,6 @@
         $userLog=$userIdFetch['log'];
         if($userCount>=1 and $userLog==1)
         {
-
             $_SESSION['user'] = $userId;
             sleep(2);
             echo "<script>

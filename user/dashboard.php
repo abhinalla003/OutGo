@@ -6,6 +6,7 @@
         $userId=$_SESSION['user'];
         $ttl_amt=0;
         date_default_timezone_set("Asia/Kolkata");
+        $curDate=date("d-m-Y");
         $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
         $userDetailsResult=mysqli_query($conn,$userDetails);
         $userInfo=mysqli_fetch_assoc($userDetailsResult);
@@ -33,6 +34,26 @@
         $fetchCategory="SELECT * FROM tbl_category";
         $fetchCategoryResult=mysqli_query($conn,$fetchCategory);
         $allCategory=mysqli_fetch_all($fetchCategoryResult,MYSQLI_ASSOC);
+
+        $dailyTips="SELECT * FROM tbl_tips";
+        $dailyTipsResult=mysqli_query($conn,$dailyTips);
+        $allTips=mysqli_fetch_all($dailyTipsResult,MYSQLI_ASSOC);
+
+        $sql="SELECT * FROM tbl_statement WHERE u_id='$userId'";
+        $result=mysqli_query($conn,$sql);
+        $resultSet=mysqli_fetch_assoc($result);
+        $lmon=intval($resultSet['value']);
+        $cmon=intval(date("m"));
+        $diff=$cmon-$lmon;
+
+        if(date("d")=="21")
+        {
+            if($diff==1 or $diff==-11 or $lmon==0)
+            {
+                $mon=date('m');
+                header("Location:laststatement.php?date=$mon");
+            }
+        }
         ?>
 <!DOCTYPE html>
 
@@ -65,7 +86,7 @@
             <a href="myexpenses.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Expenses">Expenses</a>
             <a href="#" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
-                style="margin-top: 0.5rem;" title="Account Settings">Acoount Setting</a>
+                style="margin-top: 0.5rem;" title="Account Settings">Account Settings</a>
             <a href="statement.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Statement">Statement</a>
             <a href="dashboard.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
@@ -163,14 +184,55 @@
                 </div>
                 <br>
 
+                <?php
+
+                ?>
                 <!-- Alert Box -->
                 <div
                     class="dj-container dj-display-container dj-round-large dj-silver dj-card-4 dj-margin-bottom dj-hide-small dj-hover-shadow-white">
                     <span onclick="this.parentElement.style.display='none'" class="dj-button dj-display-topright">
                         <i class="fa fa-lightbulb dj-text-orange" style="margin-top: 12px;"></i>
                     </span>
-                    <p class="dj-text-orange"><strong>Tips</strong></p>
-                    <p>Save Money !!!</p>
+                    <?php
+                    if(isset($_SESSION['views']))
+                    {
+                        $_SESSION['views'] = $_SESSION['views']+1;
+                        
+                        
+                    }
+                    else
+                    {
+                        $_SESSION['views']=1;
+                    }
+                        $views=$_SESSION['views'];
+                        $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                        $result=mysqli_query($conn,$sql);
+                        $num=mysqli_num_rows($result);
+                        
+                        if($num)
+                        {    
+                            $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                            $result=mysqli_query($conn,$sql);
+                            $allTips=mysqli_fetch_assoc($result);
+                            ?>
+                            <p class="dj-text-orange"><strong>Tips</strong></p>
+                            <p><?php echo $allTips['msg']; ?></p>
+                            <?php
+                        }
+                        else
+                        {
+                            $_SESSION['views']=1;
+                            $views=1;
+                            $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                            $result=mysqli_query($conn,$sql);
+                            $allTips=mysqli_fetch_assoc($result);
+                            ?>
+                            <p class="dj-text-orange"><strong>Tips</strong></p>
+                            <p><?php echo $allTips['msg']; ?></p>
+                            <?php
+                        }
+
+                    ?>
                 </div>
 
                 <!-- End Left Column -->
@@ -183,14 +245,14 @@
                         <div class="dj-row dj-card-4 dj-premium dj-round-large dj-padding dj-hover-shadow-white">
                             <h3 class="dj-text-orange"><b>Monthly Utilization</b></h3>
                             <div class="dj-white dj-margin dj-round-large">
-                                <div class="djcontainer dj-orange dj-round-large dj-text-orange"
+                                <div class="dj-container dj-orange dj-round-large dj-text-orange"
                                     style="width: <?php echo intval($uti_limit); ?>%;">|</div>
                             </div>
                             <div class="dj-margin-left dj-half" style="width: 45%;">
-                                <p><b><?php echo $ttl_amt; ?><b></p>
+                                <p class="dj-text-orange"><b><?php echo $ttl_amt; ?><b></p>
                             </div>
                             <div class="dj-half" style="width: 45%;">
-                                <p style="margin-left: 20rem;" class="dj-text-orange"><b><?php echo $total_limit; ?><b>
+                                <p style="margin-left: 20rem;" class="dj-text-white"><b><?php echo $total_limit; ?><b>
                                 </p>
                             </div>
                         </div>

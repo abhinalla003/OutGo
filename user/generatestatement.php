@@ -5,6 +5,7 @@
         include '../connection.php';
         $userId=$_SESSION['user'];
         $ttl_amt=0;
+        $index=0;
         date_default_timezone_set("Asia/Kolkata");
         $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
         $userDetailsResult=mysqli_query($conn,$userDetails);

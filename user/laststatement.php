@@ -1,10 +1,17 @@
 <?php
     session_start();
     if(isset($_SESSION['user'])) {
+        date_default_timezone_set("Asia/Kolkata");
         include '../connection.php';
+        $mon=$_REQUEST['date'];
+        $month=$mon-1;
+        $year=date("Y");
+        $curDate=date("Y-m-d");
+        $curTime=date("h:i:s");
+        $from="$year-$month-01";
+        $to="$year-$month-31";
         $userId=$_SESSION['user'];
         $ttl_amt=0;
-        date_default_timezone_set("Asia/Kolkata");
         $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
         $userDetailsResult=mysqli_query($conn,$userDetails);
         $userInfo=mysqli_fetch_assoc($userDetailsResult);
@@ -17,9 +24,6 @@
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
         
-        if(isset($_REQUEST['pdf'])){
-            $to = $_REQUEST['to'];
-            $from = $_REQUEST['from'];
 
             $fetchTransaction="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$from' AND date<='$to' ORDER BY date ASC";
             $fetchTransactionResult=mysqli_query($conn,$fetchTransaction);
@@ -155,7 +159,7 @@
 
             $message.="
             <h4>Dear ".$userName.",
-            <h3>Statement of your Account from ". $from ." to ". $to ."</h3>
+            <h3>Statement of your Account</h3>
             <p>*** It is computer generated statement ***</p>
             <p>Please feel free to mail us on : <a href='outgomonthlyexpenses@gmail.com'>outgomonthlyexpenses@gmail.com</a></p>";
 
@@ -163,20 +167,32 @@
 
             $email->addStringAttachment($pdfdoc,'statement.pdf');
 
-            if(!$email->Send()) {
-
-            echo "Error: " . $email->ErrorInfo;
-
-            } else {
-
-                echo "<script>alert('Email sent successfully ...');
-                window.location.href='statement.php';
-                </script>";
-                
-
+            if($email->Send()) 
+            {
+                $checkUser="SELECT * FROM tbl_statement WHERE u_id='$userId'";
+                $checkUserResult=mysqli_query($conn,$checkUser);
+                $countSt=mysqli_num_rows($checkUserResult);
+                if($countSt)
+                {
+                    $updateSt="UPDATE tbl_statement SET created_date='$curDate', created_time='$curTime', 
+                    st_from='$from', st_to='$to', value='$mon' WHERE u_id='$userId'";
+                    mysqli_query($conn,$updateSt);
+                    echo '<script>
+                    window.location.href="dashboard.php";
+                    </script>';
+                }
+                else
+                {
+                    $insertSt="INSERT INTO tbl_statement (u_id,created_date,created_time,st_from,st_to,value)
+                    VALUES ('$userId','$curDate','$curTime','$from','$to','$mon')";
+                    mysqli_query($conn,$insertSt);
+                    echo '<script>
+                    window.location.href="dashboard.php";
+                    </script>';
+                }
             }
 
-        }
+        
     }
 
     else

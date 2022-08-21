@@ -154,16 +154,53 @@
                 </div>
                 <br>
 
-                <!-- Alert Box -->
+<!-- Alert Box -->
                 <div
                     class="dj-container dj-display-container dj-round-large dj-silver dj-card-4 dj-margin-bottom dj-hide-small dj-hover-shadow-white">
                     <span onclick="this.parentElement.style.display='none'" class="dj-button dj-display-topright">
                         <i class="fa fa-lightbulb dj-text-orange" style="margin-top: 12px;"></i>
                     </span>
-                    <p class="dj-text-orange"><strong>Tips</strong></p>
-                    <p>Save Money !!!</p>
-                </div>
+                    <?php
+                    if(isset($_SESSION['views']))
+                    {
+                        $_SESSION['views'] = $_SESSION['views']+1;
+                        
+                        
+                    }
+                    else
+                    {
+                        $_SESSION['views']=1;
+                    }
+                        $views=$_SESSION['views'];
+                        $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                        $result=mysqli_query($conn,$sql);
+                        $num=mysqli_num_rows($result);
+                        
+                        if($num)
+                        {    
+                            $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                            $result=mysqli_query($conn,$sql);
+                            $allTips=mysqli_fetch_assoc($result);
+                            ?>
+                            <p class="dj-text-orange"><strong>Tips</strong></p>
+                            <p><?php echo $allTips['msg']; ?></p>
+                            <?php
+                        }
+                        else
+                        {
+                            $_SESSION['views']=1;
+                            $views=1;
+                            $sql="SELECT * FROM tbl_tips WHERE t_id='$views'";
+                            $result=mysqli_query($conn,$sql);
+                            $allTips=mysqli_fetch_assoc($result);
+                            ?>
+                            <p class="dj-text-orange"><strong>Tips</strong></p>
+                            <p><?php echo $allTips['msg']; ?></p>
+                            <?php
+                        }
 
+                    ?>
+                </div>
                 <!-- End Left Column -->
             </div>
 
