@@ -27,8 +27,9 @@
 
 <head>
     <!-- Importing CSS file -->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dj-style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Home | Monthly Expenses</title>
 </head>
 
@@ -40,6 +41,7 @@
                 <a href="#home" class="dj-bar-item dj-wide dj-remove-underline" style="margin-top:0.4rem"><img
                         src="images/1111.png" width="400rem" height="40rem"></a>
             </div>
+            
             <div class="dj-right" id="myNavbar"
                 style="padding-top: 1rem;padding-bottom: 1rem;padding-left: 0.5rem;padding-right: 1rem;">
                 <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
@@ -54,18 +56,35 @@
         </div>
     </div>
 
+    <div class="dj-hide-large" style="width:100%;position:fixed;bottom:0;">
+        <div class="dj-bar dj-padding dj-black dj-card-4">
+            <div class="dj-small">
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-home fa-fw dj-text-orange dj-margin-right"></i>Home</a>
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-user fa-fw dj-text-orange dj-margin-right"></i>About Us</a>
+                <a href="#home" class="dj-bar-item dj-remove-underline"><b><i
+                            class="fa fa-headset fa-fw dj-text-orange dj-margin-right"></i>Contact Us</a>
+                
+            </div>
+        </div>
+    </div>
+
     <div class="dj-top dj-padding dj-margin-top dj-hide-large dj-hide-medium">
         <div class="dj-bar dj-silver dj-round-large dj-wide dj-padding dj-card-4">
-            <a href="#home" class="dj-bar-item dj-remove-underline"><img src="images/1111.png" width="400rem"
-                    height="40rem"></a>
+            <a href="#home" class="dj-bar-item dj-remove-underline"><img src="images/1111.png" width="300rem"
+                    height="30rem"></a>
         </div>
     </div>
 
     <div class="dj-content dj-padding" style="max-width:1564px">
-        <div class="dj-container dj-padding-32 dj-right dj-animate-right" style="margin-top: 80px;">
+        <div class="dj-container dj-padding-32 dj-right dj-animate-right dj-hide-small" style="margin-top: 80px;">
             <img src="images/bg-home.png" width="100%" height="100%">
         </div>
-        <div class="dj-padding-32 dj-left dj-animate-left" style="margin-top:170px;margin-left: 3rem;">
+        <div class="dj-animate-left dj-hide-large dj-hide-medium" style="margin-top: 90px;">
+            <img src="images/bg-home.png" class="dj-image">
+        </div>
+        <div class="dj-padding-32 dj-left dj-animate-left dj-hide-small" style="margin-top:170px;margin-left: 3rem;">
             <span class="dj-text-orange" style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: xx-large;">
                 <b>Beware of little expenses.</b></span><br><br>
             <span style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: xx-large;">A small leak will sink a
@@ -78,12 +97,28 @@
                     class="dj-button dj-round-large dj-orange dj-margin-top-32">Sign Up</button></a>
         </div>
 
+        <div class="dj-animate-left dj-hide-large" style="margin-left: 1rem;">
+            <span class="dj-text-orange" style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: large;">
+                <b>Beware of little expenses.</b></span><br><br>
+            <span style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: large;">A small leak will sink a
+                great
+                ship !</span><br><br>
+            <span style="text-shadow:1px 1px 0 #444;font-weight: 9000;font-size: medium;">
+                To Manage your Monthly Expenses ...
+            </span><br>
+            <a href="register.php"><button type="button"
+                    class="dj-button dj-round-large dj-orange dj-margin-top-32">Sign Up</button></a>
+                    <a href="login.php" class="dj-bar-item dj-remove-underline dj-margin-top-32 dj-button dj-round-large dj-orange"><b>Sign
+                        In</a>
+        </div>
+
         <!-- Feachers of OutGo -->
-        <div class="dj-container dj-padding dj-row-padding" style="margin-left:3rem">
-            <div class="dj-third dj-card dj-hover-shadow-white dj-round-large dj-padding"
-                style="width:30%;margin-right: 3rem;">
+        <div class="dj-hide-large"><br></div>
+        <div class="dj-container dj-padding dj-row-padding">
+        <div class="dj-third">
+            <div class="dj-card dj-hover-shadow-white dj-round-large dj-padding">
                 <div class="dj-padding">
-                    <span class="dj-text-orange" style="font-weight: 9000;font-size:20px;">Maintain Budget Easily</span>
+                    <span class="dj-text-orange" style="font-weight: 9000;font-size:17px;">Maintain Budget Easily</span>
                     <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
                 </div>
@@ -96,10 +131,11 @@
                         in a efficient manner.</span>
                 </div>
             </div>
-            <div class="dj-third dj-card dj-hover-shadow-white dj-padding dj-round-large"
-                style="width:30%;margin-right: 3rem;">
+</div>
+<div class="dj-third">
+            <div class="dj-card dj-hover-shadow-white dj-padding dj-round-large">
                 <div class="dj-padding">
-                    <span class="dj-text-orange" style="font-weight: 9000;font-size:20px;">Automatic Monthly
+                    <span class="dj-text-orange" style="font-weight: 9000;font-size:17px;">Automatic Monthly
                         Statement</span>
                     <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
@@ -113,10 +149,11 @@
                         your all expenses.</span>
                 </div>
             </div>
-            <div class="dj-third dj-round-large dj-card dj-hover-shadow-white dj-padding"
-                style="width:30%;margin-right: 3rem;">
+</div>
+<div class="dj-third">
+            <div class="dj-round-large dj-card dj-hover-shadow-white dj-padding">
                 <div class="dj-padding">
-                    <span class="dj-text-orange" style="font-weight: 9000;font-size:20px;">Set Limit on Budget</span>
+                    <span class="dj-text-orange" style="font-weight: 9000;font-size:17px;">Set Limit on Budget</span>
                     <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
                 </div>
@@ -130,28 +167,33 @@
                 </div>
             </div>
         </div>
-
+</div>
+<br>
         <!-- About OutGo -->
         <div class="dj-container dj-padding dj-margin">
-            <div class="dj-left dj-animate-left" width="30%">
-                <img src="images/about.png">
+            <span class="dj-text-orange" style="font-weight: 9000;font-size:17px;">About Us</span>
+                    <hr style="border: 2px solid rgb(255, 255, 255);
+                        border-radius: 5px;">
+            <div class="dj-left" width="30%">
+                    <img src="images/about.png" class="dj-image">
             </div>
-            <div class="dj-padding dj-margin-top-32 dj-animate-right" width="40%">
-                <span class="dj-text-orange" style="font-weight: 9000;font-size:20px;">About Us</span>
-                <hr style="border: 2px solid rgb(255, 255, 255);
-                    border-radius: 5px;">
-                <div class="dj-padding">
-                    <span style="font-size:16px;">OutGo Provides a feacher of automatic monthly Statement of your
-                        expense. At the end of month you will get a statement of your all expenses.OutGo Provides a
-                        feacher of automatic monthly Statement of your expense. At the end of month you will get a
-                        statement of your all expenses.Using OutGo , you can set a limit for specific category in a
-                        month that helps to reduce your unwanted expenses in month.<br><br>OutGo Provides a feacher of
-                        automatic monthly Statement of your expense. At the end of month you will get a statement of
-                        your all expenses.OutGo Provides a feacher of automatic monthly Statement of your expense. At
-                        the end of month you will get a statement of your all expenses.Using OutGo , you can set a limit
-                        for specific category in a month that helps to reduce your unwanted expenses in month.OutGo
-                        Provides a feacher of automatic monthly Statement of your expense. At the end of month you will
-                        get a statement of your all expenses.</span>
+            <div class="dj-hide-small"><br><br></div>
+                <div class="dj-padding dj-margin-top-32" width="40%">
+                    
+                        
+                    <div class="dj-padding">
+                        <span style="font-size:14px;">OutGo Provides a feacher of automatic monthly Statement of your
+                            expense. At the end of month you will get a statement of your all expenses.OutGo Provides a
+                            feacher of automatic monthly Statement of your expense. At the end of month you will get a
+                            statement of your all expenses.Using OutGo , you can set a limit for specific category in a
+                            month that helps to reduce your unwanted expenses in month.<br><br>OutGo Provides a feacher of
+                            automatic monthly Statement of your expense. At the end of month you will get a statement of
+                            your all expenses.OutGo Provides a feacher of automatic monthly Statement of your expense. At
+                            the end of month you will get a statement of your all expenses.Using OutGo , you can set a limit
+                            for specific category in a month that helps to reduce your unwanted expenses in month.OutGo
+                            Provides a feacher of automatic monthly Statement of your expense. At the end of month you will
+                            get a statement of your all expenses.</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,7 +204,7 @@
             <hr style="border: 2px solid rgb(255, 255, 255);
                     border-radius: 5px;">
 
-            <div class="dj-left dj-half dj-padding dj-animate-left" width="40%">
+            <div class="dj-left dj-half dj-padding" width="40%">
                 <span class="dj-text-white" style="font-size:17px;">Reach to Us</span>
                 <div class="dj-margin-top dj-margin-right">
                     <span style="font-size:16px;" class="dj-text-orange">
@@ -221,7 +263,7 @@ border-radius: 5px;">
                 </div>
 
             </div>
-            <div class="dj-padding dj-half dj-animate-right" width="60%">
+            <div class="dj-padding dj-half" width="60%">
                 <span class="dj-text-orange" style="font-size:17px;">Write to Us</span>
                 <form action="" method="post" class="dj-margin-top">
                     <span class="dj-left dj-padding-16">Name :</span>
@@ -237,7 +279,7 @@ border-radius: 5px;">
 
             </div>
         </div>
-    </div>
+    </div><div class="dj-hide-large"><br><br></div>
     <!-- Footer -->
     <div class="dj-padding dj-margin-32 dj-hide-small">
         <div class="dj-bar dj-silver dj-round-large dj-card-4 dj-animate-bottom">
@@ -317,8 +359,6 @@ border-radius: 5px;">
                                     <path
                                         d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
                                 </svg></a>
-
-
 
                             <a href="" class="dj-hover-shadow-white dj-padding dj-remove-underline dj-round-large">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="skyblue"
