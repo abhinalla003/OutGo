@@ -12,6 +12,7 @@
         $job=$fetchUserInfo['job'];
         $bio=$fetchUserInfo['bio'];
         $dob=$fetchUserInfo['dob'];
+        $image=$fetchUserInfo['image'];
         $date1=date_create($dob);
         $dob=date_format($date1,"d F, Y");
         $email=$fetchUserInfo['email'];
@@ -43,7 +44,7 @@
     </div><br><br><br><br>
     <div class="dj-row" style="margin-right: 8rem;">
         <div class="dj-col s6 dj-center" style="margin-top: 5rem;">
-            <img src="../images/avatar.png" class="dj-circle"
+            <img src="<?php echo "../uploadProfiles/".$image; ?>" class="dj-circle"
                 style="box-shadow: 1px 1px 2px rgb(88, 86, 86), 0 0 25px rgb(80, 79, 79), 0 0 5px darkblue;margin-left: 10rem;"
                 width="350px" height="350px">
         </div>

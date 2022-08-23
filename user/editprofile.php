@@ -105,6 +105,7 @@
         {
             $expense_limit=$errStr;
         }
+        $bio=$fetchUserInfo['bio'];
     ?>
 <!DOCTYPE html>
 
@@ -157,17 +158,19 @@
     <div class="dj-container dj-content" style="max-width:1400px;margin-top:80px">
         <!-- The Grid -->
         <div class="dj-row">
+        <form action="" method="post" enctype="multipart/form-data">
             <!-- Left Column -->
             <div class="dj-col m3">
                 <!-- Profile -->
                 <div class="dj-card-4 dj-round-large dj-premium dj-hover-shadow-white">
                     <div class="dj-container">
+                    
                         <h4 class="dj-center dj-text-orange"><a href="myprofile.php" style="text-decoration: none;">My
                                 Profile</a></h4>
                         <p class="dj-center"><img id="imgFileUpload" src="../images/addimg.jpeg" class="dj-circle"
                                 style="height:106px;width:106px;cursor: pointer" alt="Avatar"></p>
                                 <span id="spnFilePath"></span>
-<input type="file" id="FileUpload1" style="display: none" />
+                        <input type="file" id="FileUpload1" name="uploadfile" style="display: none" />
                         <hr>
                         <b>Name : </b><?php echo $name; ?><br><br>
                         <b>Email ID : </b><?php echo $email; ?><br><br>
@@ -176,7 +179,7 @@
                         <b>Age : </b><?php echo $age; ?><br><br>
                         <b>Job : </b><?php echo $job; ?><br><br>
                         <b>Address : </b><?php echo $address; ?><br><br>
-                        <b>city : </b><?php echo $city; ?><br><br>
+                        <b>City : </b><?php echo $city; ?><br><br>
                         <b>State : </b><?php echo $state; ?><br><br>
                         <b>Country : </b><?php echo $country; ?><br><br>
                         <b>Monthly Salary : </b><?php echo $salary; ?><br><br>
@@ -191,83 +194,93 @@
                         <div class="dj-card-4 dj-round dj-silver dj-hover-shadow-white">
                             <div class="dj-container dj-padding dj-margin-bottom">
                                 <h2 class="dj-text-orange">Edit Profile </h2>
-                                <form action="" method="post">
                                     <div class="dj-row-padding">
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Name :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="name">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" value="<?php echo $name; ?>" name="name" required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">DOB :</span>
-                                            <input type="date" placeholder="yyyy-mm-dd"
+                                            <input type="date" placeholder="yyyy-mm-dd" value="<?php echo $dob; ?>"
                                                 class="dj-input dj-round-large dj-premium" name="dob" required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Age :</span>
-                                            <input type="number" class="dj-input dj-round-large dj-premium" name="age">
+                                            <input type="number" class="dj-input dj-round-large dj-premium" value="<?php echo $age; ?>" name="age" required>
                                         </div>
                                     </div><br>
                                     <div class="dj-row-padding">
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Job :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="job">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" value="<?php echo $job; ?>" name="job" required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Monthly Salary :</span>
                                             <input type="number" class="dj-input dj-round-large dj-premium"
-                                                name="salary">
+                                             value="<?php echo $salary; ?>" name="salary" required>
                                         </div>
                                         <div class="dj-third">
                                             <span class="dj-left dj-padding-16">Expense limit :</span>
                                             <input type="number" class="dj-input dj-round-large dj-premium"
-                                                name="limit">
+                                                name="limit" value="<?php echo $expense_limit; ?>" required>
                                         </div>
                                     </div><br>
                                     <div class="dj-row-padding">
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Email ID :</span>
                                             <input type="email" value="<?php echo $email; ?>"
-                                                class="dj-input dj-round-large dj-premium" name="email">
+                                                class="dj-input dj-round-large dj-premium" name="email" required>
                                         </div>
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Mobile No. :</span>
                                             <input type="number" class="dj-input dj-round-large dj-premium"
-                                                name="ph_no">
+                                                name="ph_no" value="<?php echo $phone_no; ?>" required>
                                         </div>
                                     </div><br>
                                     <div class="dj-row-padding">
                                         <div class="dj-quarter">
                                             <span class="dj-left dj-padding-16">Address :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="add">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" name="add" value="<?php echo $address; ?>" required>
                                         </div>
                                         <div class="dj-quarter">
                                             <span class="dj-left dj-padding-16">City :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="city">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" name="city" value="<?php echo $city; ?>" required>
                                         </div>
                                         <div class="dj-quarter">
                                             <span class="dj-left dj-padding-16">State :</span>
-                                            <input type="text" class="dj-input dj-round-large dj-premium" name="state">
+                                            <input type="text" class="dj-input dj-round-large dj-premium" name="state" value="<?php echo $state; ?>" required>
                                         </div>
                                         <div class="dj-quarter">
                                             <span class="dj-left dj-padding-16">Country :</span>
                                             <input type="text" class="dj-input dj-round-large dj-premium"
-                                                name="country">
+                                                name="country" value="<?php echo $country; ?>" required>
                                         </div>
                                     </div><br>
                                     <div class="dj-row-padding">
                                         <div class="dj-half">
                                             <span class="dj-left dj-padding-16">Bio :</span>
                                             <textarea rows="4" class="dj-input dj-round-large dj-premium"
-                                                name="bio"></textarea>
+                                                name="bio" required></textarea>
                                         </div>
 
                                     </div>
                                     <button name="btnSubmit"
                                         class="dj-margin-top-32 dj-margin-bottom dj-margin-left dj-button dj-orange dj-round-large">Submit</button>
-                                </form>
+                                <p class="dj-margin-left dj-text-orange">To change Your Password - <a href="../forgotpassword.php"
+                                        class="dj-remove-underline dj-text-white">Click Here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
                                 <?php
                                 if(isset($_REQUEST['btnSubmit']))
                                 {
+                                    $filename = $_FILES["uploadfile"]["name"];
+                                    $tempname = $_FILES["uploadfile"]["tmp_name"];
+                                    $folder = "../uploadProfiles/";
                                     $name=$_REQUEST['name'];
                                     $dob=$_REQUEST['dob'];
                                     $age=$_REQUEST['age'];
@@ -284,12 +297,19 @@
                                     $editUser="UPDATE tbl_user SET name='$name', email='$email', phone_no='$ph_no',
                                      dob='$dob', age='$age', job='$job', salary='$salary', expense_limit='$limit', 
                                      address='$add', city='$city', state='$state', country='$country', bio='$bio', 
-                                     log='1' WHERE u_id='$userId'";
+                                     image='$filename', log='1' WHERE u_id='$userId'";
                                     if(mysqli_query($conn,$editUser))
                                     {
-                                        echo '<script>alert("Updated Successfully..");
-                                        window.location.href="editprofile.php";
-                                        </script>';
+                                        if(move_uploaded_file($tempname, $folder . $filename))
+                                        {
+                                            echo '<script>alert("Updated Successfully..");
+                                            window.location.href="dashboard.php";
+                                            </script>';
+                                        }
+                                        else
+                                        {
+                                            echo "<script>alert('Something Went Wrong');</script>";
+                                        }
                                     }
                                     else
                                     {
@@ -297,15 +317,6 @@
                                     }
                                 }
                                 ?>
-
-                                <p class="dj-margin-left dj-text-orange">To change Your Password - <a href="../forgotpassword.php"
-                                        class="dj-remove-underline dj-text-white">Click Here</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <script>
         // Used to toggle the menu on smaller screens when clicking on the menu button

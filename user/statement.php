@@ -15,6 +15,7 @@
         $userState=$userInfo['state'];
         $userCountry=$userInfo['country'];
         $dob=$userInfo['dob'];
+        $image=$userInfo['image'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
         
@@ -57,7 +58,7 @@
                     height="40rem"></a>
             <a href="#" class="dj-bar-item dj-hide-small dj-right dj-padding-large dj-remove-underline"
                 style="margin-top: 0.5rem;" title="My Account">
-                <img src="../images/avatar.png" class="dj-circle" style="height:27px;width:27px" alt="Avatar">
+                <img src="<?php echo "../uploadProfiles/".$image; ?>" class="dj-circle" style="height:27px;width:27px" alt="Avatar">
             </a>
             <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Logout">Logout</a>
@@ -92,7 +93,7 @@
                     <div class="dj-container">
                         <h4 class="dj-center dj-text-orange"><a href="myprofile.php" style="text-decoration: none;">My
                                 Profile</a></h4>
-                        <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
+                        <p class="dj-center"><img src="<?php echo "../uploadProfiles/".$image; ?>" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
                         <p><i class="fa fa-user fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
@@ -157,6 +158,8 @@
                             <?php
                             }
                             ?>
+                            <span
+                                class="dj-tag dj-small dj-silver dj-round-large dj-padding dj-margin-bottom dj-margin-right"><a href="#" style="text-decoration: none;">Add</a></span>
                         </p>
                     </div>
                 </div>

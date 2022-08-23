@@ -5,6 +5,7 @@
         include '../connection.php';
         $userId=$_SESSION['user'];
         $ttl_amt=0;
+        $index=0;
         date_default_timezone_set("Asia/Kolkata");
         $userDetails="SELECT * FROM tbl_user WHERE u_id='$userId'";
         $userDetailsResult=mysqli_query($conn,$userDetails);
@@ -156,6 +157,8 @@
                             <?php
                             }
                             ?>
+                            <span
+                                class="dj-tag dj-small dj-silver dj-round-large dj-padding dj-margin-bottom dj-margin-right"><a href="#" style="text-decoration: none;">Add</a></span>
                         </p>
                     </div>
                 </div>
@@ -275,11 +278,21 @@
             $amount=$_REQUEST['amount'];
             $category=$_REQUEST['category'];
             $comment=$_REQUEST['comment'];
-            $addExpense="INSERT INTO tbl_expenses (u_id,ename,date,time,amount,category,comment)
-            VALUES('$userId','$name','$date','$time','$amount','$category','$comment')";
-            if(mysqli_query($conn,$addExpense))
+            if($limit<=0)
             {
-                echo "<script>alert('Expenses added successfully...');</script>";
+                echo '<script>
+                alert("You are exceeding your limit....");
+                window.location.href="dashboard.php";
+                </script>';
+            }
+            else
+            {
+                $addExpense="INSERT INTO tbl_expenses (u_id,ename,date,time,amount,category,comment)
+                VALUES('$userId','$name','$date','$time','$amount','$category','$comment')";
+                if(mysqli_query($conn,$addExpense))
+                {
+                    echo "<script>alert('Expenses added successfully...');</script>";
+                }
             }
         }
 ?>

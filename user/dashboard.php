@@ -15,6 +15,7 @@
         $userState=$userInfo['state'];
         $userCountry=$userInfo['country'];
         $dob=$userInfo['dob'];
+        $image=$userInfo['image'];
         $date1=date_create($dob);
         $dob=date_format($date1,"F d, Y");
         
@@ -46,13 +47,61 @@
         $cmon=intval(date("m"));
         $diff=$cmon-$lmon;
 
-        if(date("d")=="21")
+        if(date("d")=="01")
         {
             if($diff==1 or $diff==-11 or $lmon==0)
             {
                 $mon=date('m');
                 header("Location:laststatement.php?date=$mon");
             }
+        }
+
+        $tod=time();
+        $totalTodExp=0;
+        $todDate=date('Y-m-d',$tod);
+        $todExp="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$todDate' AND date<='$todDate'";
+        $todExpResult=mysqli_query($conn,$todExp);
+        $allTodExp=mysqli_fetch_all($todExpResult,MYSQLI_ASSOC);
+        foreach($allTodExp as $expense)
+        {
+            $totalTodExp=$totalTodExp+$expense['amount'];
+        }
+
+        $time=time()-(60*60*24);
+        $yestDate=date('Y-m-d',$time);
+        $totalYestExp=0;
+        $yestExp="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$yestDate' AND date<='$yestDate'";
+        $yestExpResult=mysqli_query($conn,$yestExp);
+        $allYestExp=mysqli_fetch_all($yestExpResult,MYSQLI_ASSOC);
+        foreach($allYestExp as $expen)
+        {
+            $totalYestExp=$totalYestExp+$expen['amount'];
+        }
+
+        $month=date("m");
+        $lastMon=$month-1;
+        $year=date("Y");
+        $curFrom="$year-$month-01";
+        $curTo="$year-$month-31";
+        $lastFrom="$year-$lastMon-01";
+        $lastTo="$year-$lastMon-31";
+
+        $totalCurMonExp=0;
+        $curMonExp="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$curFrom' AND date<='$curTo'";
+        $curMonExpResult=mysqli_query($conn,$curMonExp);
+        $allCurMonExp=mysqli_fetch_all($curMonExpResult,MYSQLI_ASSOC);
+        foreach($allCurMonExp as $curMonExpen)
+        {
+            $totalCurMonExp=$totalCurMonExp+$curMonExpen['amount'];
+        }
+
+        $totalLastMonExp=0;
+        $lastMonExp="SELECT * FROM tbl_expenses WHERE u_id='$userId' AND date>='$lastFrom' AND date<='$lastTo'";
+        $lastMonExpResult=mysqli_query($conn,$lastMonExp);
+        $allLastMonExp=mysqli_fetch_all($lastMonExpResult,MYSQLI_ASSOC);
+        foreach($allLastMonExp as $lastMonExpen)
+        {
+            $totalLastMonExp=$totalLastMonExp+$lastMonExpen['amount'];
         }
         ?>
 <!DOCTYPE html>
@@ -79,7 +128,7 @@
                     height="40rem"></a>
             <a href="#" class="dj-bar-item dj-hide-small dj-right dj-padding-large dj-remove-underline"
                 style="margin-top: 0.5rem;" title="My Account">
-                <img src="../images/avatar.png" class="dj-circle" style="height:27px;width:27px" alt="Avatar">
+                <img src="<?php echo "../uploadProfiles/".$image; ?>" class="dj-circle" style="height:27px;width:27px" alt="Avatar">
             </a>
             <a href="../logout.php" class="dj-bar-item dj-hide-small dj-padding-large dj-remove-underline dj-right"
                 style="margin-top: 0.5rem;" title="Logout">Logout</a>
@@ -114,7 +163,7 @@
                     <div class="dj-container">
                         <h4 class="dj-center dj-text-orange"><a href="myprofile.php" style="text-decoration: none;">My
                                 Profile</a></h4>
-                        <p class="dj-center"><img src="../images/avatar.png" class="dj-circle"
+                        <p class="dj-center"><img src="<?php echo "../uploadProfiles/".$image; ?>" class="dj-circle"
                                 style="height:106px;width:106px" alt="Avatar"></p>
                         <hr>
                         <p><i class="fa fa-user fa-fw dj-margin-right dj-text-theme"></i> <?php echo $userName; ?></p>
@@ -179,6 +228,8 @@
                             <?php
                             }
                             ?>
+                            <span
+                                class="dj-tag dj-small dj-silver dj-round-large dj-padding dj-margin-bottom dj-margin-right"><a href="#" style="text-decoration: none;">Add</a></span>
                         </p>
                     </div>
                 </div>
@@ -266,8 +317,8 @@
                                                 style="margin-top:1.5rem ;"></i>
                                         </div>
                                         <div class="dj-threequarter">
-                                            <h4>Today's Expenses</h4>
-                                            <h4><b>2000</b></h4>
+                                            <h4>Today's Expense</h4>
+                                            <h4><b><?php echo $totalTodExp; ?></b></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -279,8 +330,8 @@
                                                 style="margin-top:1.5rem ;"></i>
                                         </div>
                                         <div class="dj-threequarter">
-                                            <h4>Yesterday's Expenses</h4>
-                                            <h4><b>1800</b></h4>
+                                            <h4>Yesterday's Expense</h4>
+                                            <h4><b><?php echo $totalYestExp; ?></b></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +344,7 @@
                                         </div>
                                         <div class="dj-threequarter">
                                             <h4>Current Month</h4>
-                                            <h4><b>2000</b></h4>
+                                            <h4><b><?php echo $totalCurMonExp; ?></b></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -306,10 +357,25 @@
                                         </div>
                                         <div class="dj-threequarter">
                                             <h4>Last Month Expenses</h4>
-                                            <h4><b>2000</b></h4>
+                                            <h4><b><?php echo $totalLastMonExp; ?></b></h4>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="dj-padding">
+                                    <form action="" method="post">
+                                        <div class="dj-padding dj-right">
+                                            <button name="btnAddExp" class="dj-button dj-orange dj-round-large">Add Expense</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <?php
+                                    if(isset($_REQUEST['btnAddExp']))
+                                    {
+                                        echo '<script>
+                                        window.location.href="addexpense.php";
+                                        </script>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
